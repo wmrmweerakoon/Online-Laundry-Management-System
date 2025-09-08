@@ -1,0 +1,223 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Operations</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8; /* Light background for contrast */
+            color: #495057;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #343a40;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        /* Message Display Section */
+        .message {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+
+        .message.success {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .message.error {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        /* CRUD Section */
+        .crud-section {
+            padding: 40px 20px;
+        }
+
+        .crud-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .crud-card {
+            background-color: #ffffff;
+            border-radius: 12px; /* Rounded corners */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Stronger shadow */
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative; /* For pseudo-element positioning */
+            overflow: hidden; /* Prevents overflow of pseudo-element */
+        }
+
+        .crud-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(255, 204, 0, 0.6), rgba(255, 204, 0, 0)); /* Yellow gradient */
+            z-index: 0; /* Behind the card content */
+            border-radius: 12px; /* Matches card corners */
+            transition: opacity 0.3s;
+        }
+
+        .crud-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .crud-card:hover::before {
+            opacity: 1; /* Show gradient on hover */
+        }
+
+        .crud-card h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.5em;
+            color: #343a40;
+            position: relative; /* For stacking order */
+            z-index: 1; /* On top of gradient */
+        }
+
+        .crud-card p {
+            color: #6c757d;
+            margin: 0 0 20px 0;
+            position: relative; /* For stacking order */
+            z-index: 1; /* On top of gradient */
+        }
+
+        /* Button Styles */
+        a {
+            display: inline-block;
+            padding: 12px 20px; /* Increased padding */
+            border-radius: 25px; /* Round button edges */
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+            position: relative; /* For button shadow */
+            z-index: 1; /* On top of button background */
+        }
+
+        .button-login {
+            background-color: #007bff; /* Bootstrap blue */
+        }
+
+        .button-register {
+            background-color: #28a745; /* Bootstrap green */
+        }
+
+        .button-read {
+            background-color: #17a2b8; /* Bootstrap teal */
+        }
+
+        .button-update {
+            background-color: #ffc107; /* Bootstrap yellow */
+        }
+
+        .button-delete {
+            background-color: #dc3545; /* Bootstrap red */
+        }
+
+        a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Button shadow on hover */
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>CRUD Operations</h1>
+        </div>
+    </header>
+
+    <!-- Message Display Section -->
+    <div style="text-align: center; margin-top: 20px;">
+        <%
+            String successMessage = (String) request.getAttribute("successMessage");
+            String errorMessage = (String) request.getAttribute("errorMessage");
+            if (successMessage != null) {
+        %>
+            <div class="message success">
+                <%= successMessage %>
+            </div>
+        <%
+            }
+            if (errorMessage != null) {
+        %>
+            <div class="message error">
+                <%= errorMessage %>
+            </div>
+        <%
+            }
+        %>
+    </div>
+
+    <section class="crud-section">
+        <div class="crud-grid">
+            <div class="crud-card">
+                <h3>Login</h3>
+                <p>Access your account and manage records.</p>
+                <a href="Login.jsp" class="button-login">Login</a>
+            </div>
+            <div class="crud-card">
+                <h3>Register</h3>
+                <p>Create a new account to start using the system.</p>
+                <a href="Register.jsp" class="button-register">Register</a>
+            </div>
+            <div class="crud-card">
+                <h3>Read</h3>
+                <p>View all existing records in the database.</p>
+                <a href="Read.jsp" class="button-read">Read</a>
+            </div>
+            <div class="crud-card">
+                <h3>Update</h3>
+                <p>Edit and update existing records.</p>
+                <a href="Update.jsp" class="button-update">Update</a>
+            </div>
+            <div class="crud-card">
+                <h3>Delete</h3>
+                <p>Remove records you no longer need.</p>
+                <a href="Delete.jsp" class="button-delete">Delete</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 CRUD Operations. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

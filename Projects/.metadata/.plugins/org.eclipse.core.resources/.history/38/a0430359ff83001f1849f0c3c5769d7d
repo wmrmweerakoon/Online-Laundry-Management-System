@@ -1,0 +1,81 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #f8f9fa, #e0f7fa); /* Gradient background from registration */
+    margin: 0;
+    padding: 0;
+}
+
+.login-container {
+    max-width: 400px; /* Limit width of the login container */
+    margin: 50px auto; /* Center it vertically and horizontally */
+    padding: 30px; /* Increased padding for a larger form */
+    background-color: #ffffff; /* White background for the form */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+}
+
+h2 {
+    text-align: center;
+    color: #ff6f61; /* Heading color from registration */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Space between form groups */
+}
+
+label {
+    display: block; /* Make labels block elements */
+    margin-bottom: 5px; /* Space between label and input */
+    color: #333; /* Dark gray color for labels */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%; /* Full width input fields */
+    padding: 10px; /* Padding inside the inputs */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 5px; /* Rounded corners for input fields */
+    box-sizing: border-box; /* Ensure padding and border are included in total width */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #ff6f61; /* Use registration color on focus */
+    outline: none; /* Remove default outline */
+}
+
+button {
+    width: 100%; /* Full width button */
+    padding: 10px; /* Padding inside the button */
+    background-color: #ff6f61; /* Button background color from registration */
+    color: white; /* White text color */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners for button */
+    cursor: pointer; /* Change cursor to pointer */
+    font-size: 16px; /* Increase font size */
+}
+
+button:hover {
+    background-color: #ff4824; /* Darker button color on hover */
+}
+
+.error {
+    color: red; /* Red color for error messages */
+    font-size: 12px; /* Smaller font size for errors */
+}
+
+p {
+    text-align: center; /* Center the paragraph */
+    margin-top: 20px; /* Space above the paragraph */
+}
+
+a {
+    color: #ff6f61; /* Link color from registration */
+    text-decoration: none; /* Remove underline */
+}
+
+a:hover {
+    text-decoration: underline; /* Underline links on hover */
+}

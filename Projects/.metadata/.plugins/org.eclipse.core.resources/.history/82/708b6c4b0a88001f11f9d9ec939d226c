@@ -1,0 +1,77 @@
+package Servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/OrderTrackServlet")
+public class ordertrackservv extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    // Database connection details
+    private final String DB_URL = "jdbc:mysql://localhost:3306/your_database_name"; // Replace with your DB name
+    private final String DB_USER = "your_username"; // Replace with your DB username
+    private final String DB_PASSWORD = "your_password"; // Replace with your DB password
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Get form parameters
+        String orderNumber = request.getParameter("order_number");
+        String customerEmail = request.getParameter("customer_email");
+        
+        // Initialize response variables
+        String orderId = "";
+        String orderStatus = "";
+
+        // Database connection and query
+        try {
+            // Load JDBC driver (optional for newer versions of JDBC)
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            
+            // Prepare SQL query (replace 'orders' with your actual table name)
+            String sql = "SELECT order_id, status FROM orders WHERE order_number = ? AND customer_email = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, orderNumber);
+            statement.setString(2, customerEmail);
+            
+            // Execute query
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                orderId = resultSet.getString("order_id");
+                orderStatus = resultSet.getString("status");
+            } else {
+                orderStatus = "Order not found."; // Handle case where order is not found
+            }
+            
+            // Close connections
+            resultSet.close();
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            orderStatus = "Error retrieving order status.";
+        }
+
+        // Set response type
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        
+        // Generate the HTML response
+        out.println("<html><body>");
+        out.println("<h2>Order Status</h2>");
+        out.println("<p><strong>Order ID:</strong> " + orderId + "</p>");
+        out.println("<p><strong>Email:</strong> " + customerEmail + "</p>");
+        out.println("<p><strong>Status:</strong> " + orderStatus + "</p>");
+        out.println("</body></html>");
+        
+        out.close();
+    }
+}

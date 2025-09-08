@@ -1,0 +1,234 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Online Laundry Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Body and Font Settings */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f0f0f0, #ff6f61);
+            color: #333;
+        }
+
+        /* Navigation Bar Styling */
+        nav {
+            background-color: #222;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1em;
+            padding: 10px 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #ff6f61;
+            border-radius: 5px;
+            color: white;
+        }
+
+        /* Search bar styling */
+        .search-container {
+            margin-left: 20px;
+        }
+
+        .search-container input[type="text"] {
+            padding: 5px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        .search-container button {
+            padding: 5px 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff6f61;
+            color: white;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        .search-container button:hover {
+            background-color: #ff4a42;
+        }
+
+        /* Services Section Styling */
+        .services-section {
+            padding: 50px 20px;
+            text-align: center;
+            color: #fff;
+            background-color: #444;
+        }
+
+        .services-section h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ff6f61;
+        }
+
+        .services-section p {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            color: #f0f0f0;
+        }
+
+        .service-item {
+            background: #333;
+            margin: 20px 0;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .service-item:hover {
+            transform: scale(1.05);
+            background: #ff6f61;
+            color: white;
+        }
+
+        .service-item h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #ff6f61;
+            transition: color 0.3s;
+        }
+
+        .service-item:hover h2 {
+            color: white;
+        }
+
+        .service-item p {
+            font-size: 1.1em;
+            color: #f0f0f0;
+        }
+
+        /* Social Media Footer */
+        .social-media {
+            text-align: center;
+            padding: 20px;
+            background-color: #222;
+        }
+
+        .social-icon {
+            color: #ff6f61;
+            font-size: 1.5em;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icon:hover {
+            color: white;
+        }
+
+        /* Media Queries for Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .services-section {
+                padding: 20px 10px;
+            }
+
+            .service-item {
+                padding: 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .search-container {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="home.jsp">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="order.jsp">Order Pickup</a></li>
+                <li><a href="OrderTrackingPage.jsp">Track Orders</a></li>
+                <li><a href="pricing.jsp">Pricing</a></li>
+                <li><a href="contact.jsp">Contact Us</a></li>
+                <li><a href="Login.jsp">Login</a></li>
+            </ul>
+            <div class="search-container">
+                <input type="text" id="search" placeholder="Search...">
+                <button onclick="performSearch()">Search</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <h1>Our Services</h1>
+        <p>Discover the range of services we offer to meet your laundry needs.</p>
+
+        <div class="service-item">
+            <h2>Express Laundry</h2>
+            <p>Get your laundry done in record time with our express service.</p>
+        </div>
+
+        <div class="service-item">
+            <h2>Eco-Friendly Cleaning</h2>
+            <p>We use environmentally friendly detergents to care for your clothes and the planet.</p>
+        </div>
+
+        <div class="service-item">
+            <h2>Customizable Packages</h2>
+            <p>Create a package that suits your specific laundry requirements.</p>
+        </div>
+
+        <div class="service-item">
+            <h2>Pickup & Delivery</h2>
+            <p>We offer convenient pickup and delivery options to fit your schedule.</p>
+        </div>
+    </section>
+
+    <!-- Social Media Footer -->
+    <footer class="social-media">
+        <a href="https://www.facebook.com" target="_blank" class="social-icon">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.youtube.com" target="_blank" class="social-icon">
+            <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://www.instagram.com" target="_blank" class="social-icon">
+            <i class="fab fa-instagram"></i>
+        </a>
+    </footer>
+
+    <script src="java.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+
+@charset "UTF-8";
+/* Darker Menu Bar */
+
+
+header {
+    background-color: var(--menu-bg-color);
+    padding: 15px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+nav {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+}
+
+nav ul li a {
+    color: var(--menu-text-color); /* White text on darker background */
+    text-decoration: none;
+    font-size: 18px;
+    padding: 12px 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    position: relative;
+    border-radius: 8px;
+}
+
+nav ul li a:hover {
+    background-color: var(--menu-hover-bg-color); /* Slightly lighter gray */
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    background-color: var(--primary-color); /* Coral underline on hover */
+    left: 0;
+    bottom: 0;
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* Search Bar */
+.search-container {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 20px;
+}
+
+.search-container input {
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    border-radius: 20px;
+    width: 230px;
+    background-color: var(--search-bar-bg); /* Medium dark background for search */
+    color: var(--accent-color); /* White text in search bar */
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-container input:focus {
+    width: 270px;
+    background-color: #666;
+}
+
+.search-container button {
+    padding: 8px 12px;
+    background-color: var(--primary-color);
+    color: var(--accent-color);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.search-container button:hover {
+    background-color: var(--hover-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}

@@ -1,0 +1,42 @@
+package Servlet;
+
+import Model.CusModel;
+import Services.CusServices;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet("/UpdateServlet")
+public class UpdateServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Retrieve form data
+        int id = Integer.parseInt(request.getParameter("id"));
+        String fullname = request.getParameter("fullname");
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String confirmPassword = request.getParameter("confirmPassword");
+
+        // Create a customer model object
+        CusModel cuModel = new CusModel();
+        cuModel.setCusId(id);
+        cuModel.setCusName(fullname);
+        cuModel.setCuName(username);
+        cuModel.setCusEmail(email);
+        cuModel.setCusPassword(password);
+        cuModel.setConfPassword(confirmPassword);
+
+        // Call the service to update data
+        CusServices cusService = new CusServices();
+        cusService.updateData(cuModel);
+
+        // Redirect to the customer list page after updating
+        response.sendRedirect("ShowServlet");
+    }
+}

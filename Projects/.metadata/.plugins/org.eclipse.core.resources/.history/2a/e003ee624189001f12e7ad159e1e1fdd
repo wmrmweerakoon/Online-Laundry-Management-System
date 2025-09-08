@@ -1,0 +1,118 @@
+package Servlet;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import Controller.DBconnect123;
+import Model.contactModel;
+
+public class contactServices {
+
+    public boolean insertData(contactModel cModel) throws ClassNotFoundException {
+        boolean result = false; // Initialize result to false
+        try {
+            // Get data from model
+            String name = cModel.getName();
+            String email = cModel.getEmail();
+            String message = cModel.getMessage();
+
+            // Establish the connection
+            Connection conn = DBconnect123.getConnection();
+            String sql = "INSERT INTO contactus (name, email, message) VALUES (?, ?, ?)";
+
+            // Use PreparedStatement to avoid SQL injection
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, name);
+            pstmt.setString(2, email);
+            pstmt.setString(3, message);
+
+            int rowsAffected = pstmt.executeUpdate();
+            pstmt.close();
+
+            if (rowsAffected > 0) {
+                System.out.println("Data inserted successfully!");
+                result = true; // Insertion was successful
+            } else {
+                System.out.println("No rows affected. Insertion may have failed.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result; // Return the result indicating success or failure
+    }
+
+
+
+
+
+
+    public boolean updateData(contactModel cModel) throws ClassNotFoundException {
+        boolean result = false;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            // Get data from model
+            String name = cModel.getName();
+            String email = cModel.getEmail();
+            String message = cModel.getMessage();
+            int id = cModel.getId(); // Use ID to find the specific record
+
+            // Establish the connection
+            conn = DBconnect123.getConnection(); // Ensure your connection class works correctly
+            String sql = "UPDATE contactus SET name=?, email=?, message=? WHERE id=?";
+
+            // Use PreparedStatement to avoid SQL injection
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, name);
+            pstmt.setString(2, email);
+            pstmt.setString(3, message);
+            pstmt.setInt(4, id);
+
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                result = true; // Update was successful
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close(); // Close the connection
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+
+
+
+    public boolean deleteData(int id) throws ClassNotFoundException {
+        boolean result = false;
+        try {
+            // Establish the connection
+            Connection conn = DBconnect123.getConnection();
+            String sql = "DELETE FROM contactus WHERE id=?";
+
+            // Use PreparedStatement to avoid SQL injection
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+
+            int rowsAffected = pstmt.executeUpdate();
+            pstmt.close();
+
+            if (rowsAffected > 0) {
+                result = true; // Deletion was successful
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+}

@@ -1,0 +1,53 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+    <link rel="stylesheet" href="CSS/Read.css">
+</head>
+<body>
+    <h2>User Details</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Confirm Password</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%
+                List<CusModel> userList = (List<CusModel>) request.getAttribute("userList");
+                if (userList != null) {
+                    for (CusModel user : userList) {
+            %>
+                <tr>
+                    <td><%= user.getCusId() %></td>
+                    <td><%= user.getCusName() %></td>
+                    <td><%= user.getCuName() %></td>
+                    <td><%= user.getCusEmail() %></td>
+                    <td><%= user.getCusPassword() %></td>
+                    <td><%= user.getConfPassword() %></td>
+                </tr>
+            <%
+                    }
+                } else {
+            %>
+                <tr>
+                    <td colspan="6">No users found.</td>
+                </tr>
+            <%
+                }
+            %>
+        </tbody>
+    </table>
+
+    <a href="HomePage.jsp">Back to Home</a>
+</body>
+</html>

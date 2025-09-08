@@ -1,0 +1,140 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: url('https://www.transparenttextures.com/patterns/asfalt-light.png'), linear-gradient(135deg, #0d0d0d, #1f1f1f);
+    background-size: cover;
+    line-height: 1.6;
+}
+
+/* Header Section */
+header {
+    background-color: #202533;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    color: #ffffff;
+    font-size: 32px;
+}
+
+/* CRUD Section */
+.crud-section {
+    padding: 50px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+}
+
+.crud-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.crud-card {
+    background-color: #282c34;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 200px;
+}
+
+.crud-card:hover {
+    transform: translateY(-10px);
+}
+
+.crud-card h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #e1e1e1;
+}
+
+.crud-card p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #c4c4c4;
+    flex-grow: 1;
+}
+
+/* Button Styles */
+.button-login,
+.button-register,
+.button-read,
+.button-update,
+.button-delete {
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    color: #fff;
+    display: inline-block; /* Ensure buttons stack vertically */
+    margin-top: 10px; /* Add space above buttons */
+}
+
+/* Button Colors */
+.button-login {
+    background-color: #4caf50; /* Vibrant green for 'Login' */
+}
+
+.button-login:hover {
+    background-color: #43a047; /* Darker green on hover */
+}
+
+.button-register {
+    background-color: #ffb300; /* Bright yellow for 'Register' */
+}
+
+.button-register:hover {
+    background-color: #ffa000; /* Darker yellow on hover */
+}
+
+.button-read {
+    background-color: #42a5f5; /* Sky blue for 'Read' */
+}
+
+.button-read:hover {
+    background-color: #1e88e5; /* Slightly darker blue on hover */
+}
+
+.button-update {
+    background-color: #ffa726; /* Bright amber for 'Update' */
+}
+
+.button-update:hover {
+    background-color: #fb8c00; /* Deeper orange on hover */
+}
+
+.button-delete {
+    background-color: #ef5350; /* Vibrant red for 'Delete' */
+}
+
+.button-delete:hover {
+    background-color: #e53935; /* Darker red on hover */
+}
+
+/* Footer Section */
+footer {
+    background-color: #202533;
+    padding: 20px 0;
+    text-align: center;
+    color: #ffffff;
+}
+
+footer p {
+    font-size: 14px;
+}

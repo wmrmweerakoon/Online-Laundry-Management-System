@@ -1,0 +1,67 @@
+package Servlet;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import Controller.DBconnect123;
+
+import javax.servlet.RequestDispatcher;
+import Model.contactModel;
+import Services.contactServices;
+
+@WebServlet("/contactServlet")
+public class contactServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    public contactServlet() {
+        super();
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Initialize the contact model
+        contactModel cModel = new contactModel();
+        
+        // Set contact details from form input
+        cModel.setName(request.getParameter("name"));
+        cModel.setEmail(request.getParameter("email"));
+        cModel.setMessage(request.getParameter("message"));
+        
+        contactServices service = new contactServices();
+        
+        // Insert data and check if it was successful
+        boolean isInserted = false;
+        try {
+            isInserted = service.insertData(cModel);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        if (isInserted) {
+            // Success message
+            request.setAttribute("successMessage", "Message sent successfully!");
+        } else {
+            // Error message
+            request.setAttribute("errorMessage", "Message failed. Please try again.");
+        }
+
+        // Forward back to a page (e.g., home page)
+        RequestDispatcher dis = request.getRequestDispatcher("home.jsp");
+        dis.forward(request, response);
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
+    }
+
+
+
+}

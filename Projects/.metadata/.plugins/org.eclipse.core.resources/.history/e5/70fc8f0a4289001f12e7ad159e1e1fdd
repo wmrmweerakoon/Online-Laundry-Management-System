@@ -1,0 +1,48 @@
+package Servlet;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.RequestDispatcher;
+import Model.contactModel;
+import Services.contactServices;
+
+@WebServlet("/ContactUpdateServlet")
+public class ContactUpdateServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    public ContactUpdateServlet() {
+        super();
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Initialize the contact model
+        contactModel cModel = new contactModel();
+        cModel.setId(Integer.parseInt(request.getParameter("id"))); // Get ID from form
+        cModel.setName(request.getParameter("name"));
+        cModel.setEmail(request.getParameter("email"));
+        cModel.setMessage(request.getParameter("message"));
+
+        contactServices service = new contactServices();
+
+        boolean isUpdated;
+		try {
+			isUpdated = service.updateData(cModel);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+        if (isUpdated) {
+            request.setAttribute("successMessage", "Update successful!");
+        } else {
+            request.setAttribute("errorMessage", "Update failed. Please try again.");
+        }
+
+        RequestDispatcher dis = request.getRequestDispatcher("home.jsp");
+        dis.forward(request, response);
+    }
+}

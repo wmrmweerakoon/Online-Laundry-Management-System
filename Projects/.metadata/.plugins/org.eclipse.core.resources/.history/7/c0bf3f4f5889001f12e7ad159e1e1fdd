@@ -1,0 +1,53 @@
+package model;
+
+
+public class UpdateModel {
+	
+	
+	private int id;
+	private String newname;
+	private String newaddress;
+	private String newphone;
+	private String newpickUpdate;
+	private String newpickUptime;
+	
+
+		public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getNewname() {
+		return newname;
+	}
+	public void setNewname(String newname) {
+		this.newname = newname;
+	}
+	public String getNewaddress() {
+		return newaddress;
+	}
+	public void setNewaddress(String newaddress) {
+		this.newaddress = newaddress;
+	}
+	public String getNewphone() {
+		return newphone;
+	}
+	public void setNewphone(String newphone) {
+		this.newphone = newphone;
+	}
+	public String getNewpickUpdate() {
+		return newpickUpdate;
+	}
+	public void setNewpickUpdate(String newpickUpdate) {
+		this.newpickUpdate = newpickUpdate;
+	}
+	public String getNewpickUptime() {
+		return newpickUptime;
+	}
+	public void setNewpickUptime(String newpickUptime) {
+		this.newpickUptime = newpickUptime;
+	}
+		
+		
+}

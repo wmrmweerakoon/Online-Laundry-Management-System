@@ -1,0 +1,74 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Operations</title>
+    <link rel="stylesheet" href="CSS/HomePage.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>CRUD Operations</h1>
+        </div>
+    </header>
+
+    <%-- Message Display Section --%>
+    <div style="text-align: center; margin-top: 20px;">
+        <%
+            String successMessage = (String) request.getAttribute("successMessage");
+            String errorMessage = (String) request.getAttribute("errorMessage");
+            if (successMessage != null) {
+        %>
+            <div style="color: green; font-weight: bold;">
+                <%= successMessage %>
+            </div>
+        <%
+            }
+            if (errorMessage != null) {
+        %>
+            <div style="color: red; font-weight: bold;">
+                <%= errorMessage %>
+            </div>
+        <%
+            }
+        %>
+    </div>
+
+    <section class="crud-section">
+        <div class="crud-grid">
+            <div class="crud-card">
+                <h3>Login</h3>
+                <p>Access your account and manage records.</p>
+                <a href="Login.jsp" class="button-login">Login</a>
+            </div>
+            <div class="crud-card">
+                <h3>Register</h3>
+                <p>Create a new account to start using the system.</p>
+                <a href="Register.jsp" class="button-register">Register</a>
+            </div>
+            <div class="crud-card">
+                <h3>Read</h3>
+                <p>View all existing records in the database.</p>
+                <a href="Servlet/ReadServlet" class="button-read">Read</a>
+            </div>
+            <div class="crud-card">
+                <h3>Update</h3>
+                <p>Edit and update existing records.</p>
+                <a href="Update.jsp" class="button-update">Update</a>
+            </div>
+            <div class="crud-card">
+                <h3>Delete</h3>
+                <p>Remove records you no longer need.</p>
+                <a href="Delete.jsp" class="button-delete">Delete</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 CRUD Operations. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

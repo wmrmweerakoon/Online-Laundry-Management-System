@@ -1,0 +1,284 @@
+@charset "UTF-8";
+/* Define CSS Variables for easy customization */
+:root {
+    --primary-color: #ff6f61 !important; /* Coral Pink */
+    --secondary-color: #ff9a76 !important; /* Light Coral */
+    --accent-color: #ffffff !important; /* White */
+    --hover-color: #ff4824 !important; /* Darker Coral */
+    --menu-bg-color: #333 !important; /* Darker gray for menu bar */
+    --menu-hover-bg-color: #444 !important; /* Slightly lighter gray for hover */
+    --menu-text-color: #ffffff !important; /* White text for contrast */
+    --search-bar-bg: #555 !important; /* Medium dark background for search bar */
+    --bg-gradient-start: #f8f9fa !important; /* Light Gradient Start */
+    --bg-gradient-end: #e0f7fa !important;  /* Light Teal Gradient End */
+    --text-primary: #212529 !important; /* Darker text color */
+    --button-hover-color: #ff4824 !important; /* Deep Coral */
+}
+
+* {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+body {
+    font-family: 'Arial', sans-serif !important;
+    background: linear-gradient(to right, #ff7e5f, #feb47b) !important; /* Colorful gradient */
+    color: var(--text-primary) !important;
+}
+
+/* The rest of your CSS remains unchanged */
+
+
+/* Darker Menu Bar */
+header {
+    background-color: var(--menu-bg-color) !important;
+    padding: 15px 0 !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+}
+
+nav {
+    text-align: center !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    position: relative !important;
+}
+
+nav ul {
+    list-style-type: none !important;
+}
+
+nav ul li {
+    display: inline-block !important;
+    margin: 0 20px !important;
+    position: relative !important;
+}
+
+nav ul li a {
+    color: var(--menu-text-color) !important; /* White text on darker background */
+    text-decoration: none !important;
+    font-size: 18px !important;
+    padding: 12px 20px !important;
+    transition: background-color 0.3s ease, transform 0.2s ease !important;
+    position: relative !important;
+    border-radius: 8px !important;
+}
+
+nav ul li a:hover {
+    background-color: var(--menu-hover-bg-color) !important; /* Slightly lighter gray */
+    transform: scale(1.05) !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+}
+
+nav ul li a::after {
+    content: '' !important;
+    position: absolute !important;
+    width: 0 !important;
+    height: 3px !important;
+    background-color: var(--primary-color) !important; /* Coral underline on hover */
+    left: 0 !important;
+    bottom: 0 !important;
+    transition: width 0.3s ease !important;
+}
+
+nav ul li a:hover::after {
+    width: 100% !important;
+}
+
+/* Search Bar */
+.search-container {
+    display: inline-block !important;
+    vertical-align: middle !important;
+    margin-left: 20px !important;
+}
+
+.search-container input {
+    padding: 8px !important;
+    font-size: 16px !important;
+    border: none !important;
+    border-radius: 20px !important;
+    width: 230px !important;
+    background-color: var(--search-bar-bg) !important; /* Medium dark background for search */
+    color: var(--accent-color) !important; /* White text in search bar */
+    outline: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.search-container input:focus {
+    width: 270px !important;
+    background-color: #666 !important;
+}
+
+.search-container button {
+    padding: 8px 12px !important;
+    background-color: var(--primary-color) !important;
+    color: var(--accent-color) !important;
+    border: none !important;
+    border-radius: 20px !important;
+    cursor: pointer !important;
+    margin-left: 5px !important;
+}
+
+.search-container button:hover {
+    background-color: var(--hover-color) !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Home Section */
+/* Home Section */
+.home-section {
+    text-align: center !important;
+    padding: 100px 20px !important;
+    background: linear-gradient(to right, #ff7e5f, #feb47b) !important; /* Updated gradient */
+    position: relative !important;
+}
+
+
+.slider {
+    position: relative !important;
+}
+
+.slider-img {
+    width: 110% !important;
+    height: 250px !important;
+    object-fit: cover !important;
+    border-radius: 15px !important;
+    transition: transform 0.3s ease-in-out !important;
+    transform: translateX(-5%) !important;
+}
+
+.slider::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(0, 0, 0, 0.3) !important; /* Adjust color and opacity as needed */
+    border-radius: 15px !important;
+}
+
+.welcome-text {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    color: var(--accent-color) !important;
+}
+
+.welcome-text h1 {
+    font-size: 42px !important;
+    color: var(--primary-color) !important;
+    margin-bottom: 20px !important;
+}
+
+.welcome-text p {
+    font-size: 20px !important;
+    margin-bottom: 30px !important;
+}
+
+.welcome-text .highlight {
+    color: var(--secondary-color) !important;
+}
+
+button {
+    padding: 10px 20px !important;
+    font-size: 18px !important;
+    background-color: var(--primary-color) !important;
+    color: var(--accent-color) !important;
+    border: none !important;
+    cursor: pointer !important;
+    border-radius: 20px !important;
+    transition: background-color 0.3s ease, transform 0.3s ease !important;
+}
+
+button:hover {
+    background-color: var(--button-hover-color) !important;
+    transform: scale(1.05) !important;
+}
+
+/* New Information Section Styling */
+.info-section {
+    text-align: center !important;
+    padding: 50px 20px !important;
+    background: #fff; /* Set this to the desired background color for cards */
+    color: var(--text-primary) !important;
+}
+
+.info-cards {
+    display: flex !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    gap: 20px !important;
+}
+
+.info-card {
+    background-color: #4a90e2 !important; /* Soft Blue background color for cards */
+    border-radius: 15px !important;
+    padding: 20px !important;
+    width: 250px !important;
+    text-align: center !important;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease !important;
+}
+
+./* New Information Section Styling */
+.info-section {
+    text-align: center !important;
+    padding: 50px 20px !important;
+    background: #f7f7f7; /* Light grey background for better contrast */
+    color: var(--text-primary) !important;
+}
+
+.info-cards {
+    display: flex !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    gap: 20px !important;
+}
+
+.info-card {
+    background-color: #e98563!important; /* Soft Green background color for cards */
+    border-radius: 15px !important;
+    padding: 20px !important;
+    width: 250px !important;
+    text-align: center !important;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease !important;
+}
+
+.info-card i {
+    font-size: 40px !important;
+    color: #000000!important; /* White icon color for better visibility */
+    margin-bottom: 10px !important;
+}
+
+.info-card h3 {
+    font-size: 24px !important;
+    color: #000000!important; /* White text color for better visibility */
+    margin-bottom: 10px !important;
+}
+
+.info-card p {
+    font-size: 16px !important;
+    color: #ffffff !important; /* White text color for better visibility */
+}
+
+.info-card:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3) !important;
+    background-color: #3d9e3b !important; /* Darker Green on hover */
+}
+
+
+.social-media a {
+    color: var(--accent-color) !important;
+    font-size: 24px !important;
+    margin: 0 15px !important;
+    transition: color 0.3s ease !important;
+}
+
+.social-media a:hover {
+    color: var(--primary-color) !important;
+}

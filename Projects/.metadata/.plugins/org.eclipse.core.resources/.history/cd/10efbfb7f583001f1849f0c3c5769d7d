@@ -1,0 +1,32 @@
+package Servlet;
+
+import java.io.IOException;
+import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import Services.CusServices;
+import Model.CusModel;
+
+@WebServlet("/ShowServlet")
+public class ShowServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        CusServices cusServices = new CusServices();
+        try {
+            // Get the customer data from the service
+            List<CusModel> customerData = cusServices.showData(); // Now this will return a list
+
+            // Set the customer data in request attributes
+            request.setAttribute("customerData", customerData); // This line should not throw an error now
+
+            // Forward to a JSP page to display the data
+            request.getRequestDispatcher("Read.jsp").forward(request, response);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+}

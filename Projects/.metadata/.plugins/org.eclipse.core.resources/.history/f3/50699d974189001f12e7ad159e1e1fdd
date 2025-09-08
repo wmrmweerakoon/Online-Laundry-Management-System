@@ -1,0 +1,92 @@
+package Services;
+
+import Model.contactModel;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class contactServices {
+
+    public boolean updateData(contactModel cModel) {
+        boolean result = false;
+        try {
+            // Get data from model
+            String name = cModel.getName();
+            String email = cModel.getEmail();
+            String message = cModel.getMessage();
+            int id = cModel.getId(); // Use ID to find the specific record
+
+            // Establish the connection
+            Connection conn = DBconnect123.getConnection();
+            String sql = "UPDATE contactus SET name=?, email=?, message=? WHERE id=?";
+
+            // Use PreparedStatement to avoid SQL injection
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, name);
+            pstmt.setString(2, email);
+            pstmt.setString(3, message);
+            pstmt.setInt(4, id);
+
+            int rowsAffected = pstmt.executeUpdate();
+            pstmt.close();
+
+            if (rowsAffected > 0) {
+                result = true; // Update was successful
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public boolean deleteData(int id) {
+        boolean result = false;
+        try {
+            // Establish the connection
+            Connection conn = DBconnect123.getConnection();
+            String sql = "DELETE FROM contactus WHERE id=?";
+
+            // Use PreparedStatement to avoid SQL injection
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+
+            int rowsAffected = pstmt.executeUpdate();
+            pstmt.close();
+
+            if (rowsAffected > 0) {
+                result = true; // Deletion was successful
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    // Add method to retrieve contact by ID
+    public contactModel getContactById(int id) {
+        contactModel contact = null;
+        try {
+            Connection conn = DBconnect123.getConnection();
+            String sql = "SELECT * FROM contactus WHERE id=?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            var rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                contact = new contactModel();
+                contact.setId(rs.getInt("id"));
+                contact.setName(rs.getString("name"));
+                contact.setEmail(rs.getString("email"));
+                contact.setMessage(rs.getString("message"));
+            }
+
+            pstmt.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return contact;
+    }
+}

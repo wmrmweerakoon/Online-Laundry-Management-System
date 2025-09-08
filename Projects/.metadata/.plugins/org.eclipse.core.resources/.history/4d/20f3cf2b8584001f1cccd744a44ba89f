@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+}
+
+.register-background {
+    background: linear-gradient(to right, #ffb347, #ffcc33); /* Softer gradient */
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    height: 100vh; /* Full viewport height */
+}
+
+.register-container {
+    background-color: #fff; /* White background for the form */
+    padding: 30px; /* Reduced padding for a smaller form */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    width: 400px; /* Fixed width for the form */
+}
+
+h2 {
+    text-align: center; /* Center the heading */
+    color: #ff6f61; /* Heading color */
+    margin-bottom: 15px; /* Reduced space below the heading */
+}
+
+.info-text {
+    text-align: center; /* Center the informational text */
+    color: #333; /* Text color */
+    margin-bottom: 20px; /* Space below the info text */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Reduced space below each form group */
+}
+
+label {
+    font-size: 16px; /* Slightly smaller font size for labels */
+    color: #333; /* Label color */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%; /* Full width */
+    padding: 10px; /* Reduced padding inside input fields */
+    margin-top: 5px; /* Reduced space above input fields */
+    border: 1px solid #ccc; /* Border for the input fields */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Input font size */
+}
+
+button {
+    width: 100%; /* Full width for the button */
+    padding: 10px; /* Reduced padding inside the button */
+    background-color: #ff6f61; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Slightly smaller font size for the button */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+button:hover {
+    background-color: #ff4824; /* Button color on hover */
+}
+
+.error {
+    color: red; /* Error message color */
+    font-size: 14px; /* Error message font size */
+    margin-top: 5px; /* Space above the error message */
+}
+
+p {
+    text-align: center; /* Center the paragraph text */
+}
+
+a {
+    color: #ff6f61; /* Link color */
+    text-decoration: none; /* Remove underline from links */
+}
+
+a:hover {
+    text-decoration: underline; /* Underline on hover */
+}

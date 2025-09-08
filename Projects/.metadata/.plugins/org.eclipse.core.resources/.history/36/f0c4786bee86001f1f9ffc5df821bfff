@@ -1,0 +1,63 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Track Order - Delete Data</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f4f4f4;
+			margin: 0;
+			padding: 40px;
+			text-align: center;
+		}
+
+		h4 {
+			color: #dc3545; /* Red color for delete success message */
+			font-size: 24px;
+			margin-bottom: 20px;
+		}
+
+		a button {
+			background-color: #007BFF; /* Blue button color */
+			color: white;
+			border: none;
+			border-radius: 4px;
+			padding: 10px 20px;
+			font-size: 16px;
+			cursor: pointer;
+			transition: background-color 0.3s;
+		}
+
+		a button:hover {
+			background-color: #0056b3; /* Darker blue on hover */
+		}
+
+		@media (max-width: 600px) {
+			body {
+				padding: 20px;
+			}
+
+			h4 {
+				font-size: 20px; /* Adjust font size for smaller screens */
+			}
+
+			a button {
+				font-size: 14px; /* Adjust button font size for smaller screens */
+			}
+		}
+	</style>
+</head>
+<body>
+	<h4>------- Data Deleted Successfully! ------</h4>
+	<a href="TrackCRUDPage.jsp">
+		<button>Back</button>
+	</a>
+</body>
+</html>

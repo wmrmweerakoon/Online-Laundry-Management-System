@@ -1,0 +1,37 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="Model.CusModel" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Customer</title>
+</head>
+<body>
+    <h2>Update Customer</h2>
+    <form action="UpdateServlet" method="POST">
+        <input type="hidden" name="id" value="<%= request.getParameter("id") %>"/>
+        <div>
+            <label>Full Name:</label>
+            <input type="text" name="fullname" value="<%= customer.getCusName() %>" required>
+        </div>
+        <div>
+            <label>Username:</label>
+            <input type="text" name="username" value="<%= customer.getCuName() %>" required>
+        </div>
+        <div>
+            <label>Email:</label>
+            <input type="email" name="email" value="<%= customer.getCusEmail() %>" required>
+        </div>
+        <div>
+            <label>Password:</label>
+            <input type="password" name="password" required>
+        </div>
+        <div>
+            <label>Confirm Password:</label>
+            <input type="password" name="confirmPassword" required>
+        </div>
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>

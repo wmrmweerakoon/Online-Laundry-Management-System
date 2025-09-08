@@ -1,0 +1,71 @@
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    // Your existing code...
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Get the form data
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+
+        // Call the validateUser method
+        boolean isValidUser = validateUser(username, email, password);
+
+        if (isValidUser) {
+            // Redirect to the welcome page or dashboard
+            response.sendRedirect("welcome.jsp");
+        } else {
+            // Set error message and forward back to login page
+            request.setAttribute("errorMessage", "Invalid username, email, or password.");
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
+        }
+    }
+
+    private boolean validateUser(String username, String email, String password) {
+        boolean isValid = false;
+        String jdbcURL = "jdbc:mysql://localhost:3306/yourdbname"; // Update with your database name
+        String dbUser = "yourusername"; // Update with your database username
+        String dbPassword = "yourpassword"; // Update with your database password
+
+        // Use try-with-resources to automatically close resources
+        try (Connection connection = DriverManager.getConnection(jdbcURL, dbUser, dbPassword)) {
+            // Prepare a SQL statement to select user details
+            String sql = "SELECT * FROM customer WHERE Uname = ? AND email = ?";
+            
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, username);
+                statement.setString(2, email);
+                ResultSet resultSet = statement.executeQuery();
+                
+                // Check if the user exists and validate the password
+                if (resultSet.next()) {
+                    String storedPassword = resultSet.getString("pass");
+                    
+                    // Compare the entered password with the stored password
+                    if (storedPassword.equals(password)) {
+                        isValid = true; // Valid user
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle any SQL exceptions
+        }
+
+        return isValid; // Return true if the user is valid, otherwise false
+    }
+}

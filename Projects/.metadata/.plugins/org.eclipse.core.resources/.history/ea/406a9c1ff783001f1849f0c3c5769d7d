@@ -1,0 +1,50 @@
+package Servlet;
+
+import java.io.IOException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import Model.CusModel;
+import Services.CusServices;
+
+@WebServlet("/ShowServlet")
+public class ShowServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    public ShowServlet() {
+        super();
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Get the username from the request
+        String username = request.getParameter("username");
+
+        // Create an instance of CusServices to interact with the database
+        CusServices cusService = new CusServices();
+        CusModel userModel = null;
+
+        try {
+            // Fetch user details based on username
+            userModel = cusService.getUserByUsername(username);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        if (userModel != null) {
+            // Set the user model in the request attribute
+            request.setAttribute("user", userModel);
+            // Forward to the JSP page to display user details
+            RequestDispatcher dis = request.getRequestDispatcher("Read.jsp");
+            dis.forward(request, response);
+        } else {
+            // Set an error message if the user is not found
+            request.setAttribute("errorMessage", "User not found.");
+            RequestDispatcher dis = request.getRequestDispatcher("ErrorPage.jsp");
+            dis.forward(request, response);
+        }
+    }
+}

@@ -1,0 +1,29 @@
+<section class="read-section">
+    <form action="ReadServlet" method="post">
+        <button type="submit" class="button-read">Fetch Records</button>
+    </form>
+
+    <table class="records-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Password</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%-- Loop through your records here --%>
+            <% for (Customer customer : customerList) { %>
+                <tr>
+                    <td><%= customer.getId() %></td>
+                    <td><%= customer.getFname() %></td>
+                    <td><%= customer.getUname() %></td>
+                    <td><%= customer.getEmail() %></td>
+                    <td><%= customer.getPass() %></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</section>

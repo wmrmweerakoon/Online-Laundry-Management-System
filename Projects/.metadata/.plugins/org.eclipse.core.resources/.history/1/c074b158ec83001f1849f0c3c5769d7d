@@ -1,0 +1,45 @@
+package Servlet;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import Model.CusModel;
+import Services.CusServices;
+
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    public LoginServlet() {
+        super();
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        CusModel cuModel = new CusModel();
+
+        // Get the form data from the request
+        String fullname = request.getParameter("fullname");
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String confirmPassword = request.getParameter("confirmPassword");
+
+        // Set data in the CusModel object
+        cuModel.setCusName(fullname);
+        cuModel.setCuName(username);
+        cuModel.setCusEmail(email);
+        cuModel.setCusPassword(password);
+        cuModel.setConfPassword(confirmPassword);
+
+        // Insert the data using CusServices
+        CusServices cusService = new CusServices();
+        cusService.insertData(cuModel);
+
+        // Forward to success or next page
+        response.sendRedirect("HomePage.jsp");
+    }
+}

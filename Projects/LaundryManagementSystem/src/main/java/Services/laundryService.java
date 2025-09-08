@@ -1,0 +1,151 @@
+package Services;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import Controller.DBconnect;
+import Model.DeleteModel;
+import Model.OrderModel;
+import Model.UpdateModel;
+
+import java.sql.Connection;
+
+public class laundryService {
+	public void insertData(OrderModel mMod) {
+	    
+	    try {
+	        String name = mMod.getName();
+	        String address = mMod.getAddress();
+	        String phone = mMod.getPhone();
+	        String pickUpdate = mMod.getPickUpdate();
+	        String pickUptime = mMod.getPickUptime();
+	       
+	        DBconnect db = new DBconnect();
+	       
+	        String sql = "INSERT INTO order3 (name, address, phone, pickUpdate, pickUptime) VALUES (?, ?, ?, ?, ?)";
+	        
+	        PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
+	        
+	        pstmt.setString(1, name);
+	        pstmt.setString(2, address);
+
+	        pstmt.setString(3, phone);
+	        pstmt.setString(4, pickUpdate);
+	        pstmt.setString(5, pickUptime);
+	        
+	        pstmt.executeUpdate();
+	        
+	        pstmt.close();
+	        
+	    } catch(Exception e) {
+	        e.printStackTrace();
+	    }
+	   
+	}
+	
+	
+	public void updateData(UpdateModel upMod) {
+		try {
+			
+			
+			String newname = upMod.getNewname();
+			String newaddress = upMod.getNewaddress();
+			String newphone = upMod.getNewphone();
+	        String newpickUpdate = upMod.getNewpickUpdate();
+	        String newpickUptime = upMod.getNewpickUptime();
+	        int id = upMod.getId();
+
+	        
+	       
+			DBconnect db = new DBconnect();
+			String sql = "UPDATE order3 SET name = ?, address = ?, phone = ?, pickUpdate = ?, pickUptime = ? WHERE id = ?";
+	        PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
+	        
+	        
+	        pstmt.setString(1, newname);
+	        pstmt.setString(2, newaddress);
+	        pstmt.setString(3, newphone); 
+	        pstmt.setString(4, newpickUpdate); 
+	        pstmt.setString(5, newpickUptime); 
+	        pstmt.setInt(6, id); 
+	        
+	        
+	        pstmt.executeUpdate();
+	        
+	        pstmt.close();
+	        
+			
+		}catch(Exception e) {
+			
+			e.printStackTrace();
+				
+		}
+		
+		
+	}
+		
+	
+		public void deleteData(DeleteModel dMod) {
+			try {
+				int id = dMod.getId();
+				
+				DBconnect db = new DBconnect();
+				
+	            String sql = "DELETE FROM order3 WHERE id = ?";
+	            
+	            PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
+	            
+	            pstmt.setInt(1, id);
+
+	            pstmt.executeUpdate();
+	            
+	            pstmt.close();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+	
+		}
+
+
+public List<OrderModel> showData() {
+    List<OrderModel> oList = new ArrayList<>();
+    try (Connection conn = new DBconnect().getConnection()) {
+        String sql = "SELECT * FROM order3";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+            String address = rs.getString("address");
+            String phone = rs.getString("phone");
+            String pickUpdate = rs.getString("pickUpdate");
+            String pickUptime = rs.getString("pickUptime");
+
+            // Debug print statement to check if data is retrieved
+            System.out.println("Retrieved Order: ID=" + id + ", Name=" + name + "address =" +address+"phone =" +phone+"pickUpdate =" +pickUpdate+"pickUptime =" +pickUptime);
+
+            // Creating OrderModel object and setting values
+            OrderModel order = new OrderModel();
+            order.setId(id);
+            order.setName(name);
+            order.setAddress(address);
+            order.setPhone(phone);
+            order.setPickUpdate(pickUpdate);
+            order.setPickUptime(pickUptime);
+
+            // Adding to the list
+            oList.add(order);
+        }
+
+        rs.close();
+        pstmt.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return oList;
+}
+}
+

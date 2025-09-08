@@ -1,0 +1,71 @@
+body {
+    background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient background for the page */
+    font-family: Arial, sans-serif; /* Font family for the whole page */
+    margin: 0; /* Remove default margin */
+    padding: 20px; /* Add some padding around the body */
+    color: #333; /* Default text color */
+}
+
+.register-container {
+    max-width: 400px; /* Width of the registration form */
+    margin: 0 auto; /* Center the form horizontally */
+    background-color: #ffffff; /* Set the background color for the form */
+    padding: 20px; /* Added padding for better spacing */
+    border-radius: 5px; /* Rounded corners for the form */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+}
+
+.register-container h2 {
+    text-align: center; /* Center the heading */
+}
+
+.register-container .info-text {
+    text-align: center; /* Center the info text */
+    margin-bottom: 20px; /* Spacing below the info text */
+}
+
+.register-container .form-group {
+    margin-bottom: 15px; /* Spacing between form fields */
+}
+
+.register-container label {
+    display: block; /* Display label as block for full width */
+    margin-bottom: 5px; /* Spacing below labels */
+}
+
+.register-container input {
+    width: 100%; /* Full width of input fields */
+    padding: 10px; /* Spacing within input fields */
+    border: 1px solid #ccc; /* Border styling */
+    border-radius: 3px; /* Rounded corners for input fields */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.register-container button {
+    width: 100%; /* Full width of the button */
+    padding: 10px; /* Padding for button */
+    background-color: #28a745; /* Button color */
+    color: white; /* Text color for button */
+    border: none; /* Remove default border */
+    border-radius: 3px; /* Rounded corners for button */
+    cursor: pointer; /* Pointer on hover */
+    font-size: 16px; /* Font size for button text */
+}
+
+.register-container button:hover {
+    background-color: #218838; /* Darker shade on hover */
+}
+
+.register-container p {
+    text-align: center; /* Center the paragraph */
+    margin-top: 20px; /* Spacing above paragraph */
+}
+
+.register-container a {
+    color: #007bff; /* Link color */
+    text-decoration: none; /* Remove underline */
+}
+
+.register-container a:hover {
+    text-decoration: underline; /* Underline on hover */
+}

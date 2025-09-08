@@ -1,0 +1,111 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.login-background {
+    background: linear-gradient(to right, #ffb347, #ffcc33); /* Softer gradient */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+
+.content-container {
+    display: flex;
+    width: 80%; /* Adjust as needed */
+    max-width: 1200px; /* Optional max width */
+}
+
+.text-content {
+    flex: 1; /* Take up remaining space */
+    color: #fff; /* Text color for better visibility */
+    padding: 20px; /* Padding around text */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Subtle shadow for better visibility */
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.login-container {
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent for a modern look */
+    padding: 50px; 
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    width: 400px; 
+    margin-left: 20px; /* Space between text and login form */
+    text-align: center; /* Center content */
+}
+
+h2 {
+    color: #ff6f61;
+    margin-bottom: 25px; 
+}
+
+.form-group {
+    margin-bottom: 20px; 
+}
+
+label {
+    font-size: 18px; 
+    color: #333;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px; 
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px; 
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: #ff6f61; /* Highlight border color on focus */
+}
+
+button {
+    width: 100%;
+    padding: 12px; 
+    background-color: #ff6f61;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px; 
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #ff4824;
+}
+
+.error {
+    color: red;
+    font-size: 14px; 
+    margin-top: 5px;
+}
+
+p {
+    margin-top: 15px;
+}
+
+p a {
+    color: #ff6f61;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+}

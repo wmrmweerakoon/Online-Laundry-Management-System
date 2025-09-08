@@ -1,0 +1,313 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Orders - Online Laundry Management System</title>
+    <link rel="stylesheet" href="track.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Define CSS Variables for easy customization */
+        :root {
+            --primary-color: #ff6f61; /* Coral Pink */
+            --secondary-color: #ff9a76; /* Light Coral */
+            --accent-color: #ffffff; /* White */
+            --hover-color: #ff4824; /* Darker Coral */
+            --menu-bg-color: #333; /* Darker gray for menu bar */
+            --menu-hover-bg-color: #444; /* Slightly lighter gray for hover */
+            --menu-text-color: #ffffff; /* White text for contrast */
+            --search-bar-bg: #555; /* Medium dark background for search bar */
+            --bg-gradient-start: #f8f9fa; /* Light Gradient Start */
+            --bg-gradient-end: #e0f7fa; /* Light Teal Gradient End */
+            --text-primary: #212529; /* Darker text color */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, var(--bg-gradient-start), var(--bg-gradient-end));
+            color: var(--text-primary);
+        }
+
+        /* Header and Navigation Bar */
+        header {
+            background-color: var(--menu-bg-color);
+            padding: 15px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        nav {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        nav ul {
+            list-style-type: none;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: var(--menu-text-color);
+            text-decoration: none;
+            font-size: 18px;
+            padding: 12px 20px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border-radius: 8px;
+        }
+
+        nav ul li a:hover {
+            background-color: var(--menu-hover-bg-color);
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background-color: var(--primary-color);
+            left: 0;
+            bottom: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .search-container {
+            display: inline-block;
+            margin-left: 20px;
+        }
+
+        .search-container input {
+            padding: 8px;
+            font-size: 16px;
+            border: none;
+            border-radius: 20px;
+            width: 230px;
+            background-color: var(--search-bar-bg);
+            color: var(--accent-color);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-container input:focus {
+            background-color: #666;
+        }
+
+        .search-container button {
+            padding: 8px 12px;
+            background-color: var(--primary-color);
+            color: var(--accent-color);
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        .search-container button:hover {
+            background-color: var(--hover-color);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Track Orders Section */
+        .track-orders-section {
+            max-width: 800px;
+            margin: 50px auto;
+            text-align: center;
+            padding: 20px;
+            background-color: #fff; /* White background */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow */
+            border-radius: 10px;
+        }
+
+        .track-orders-section h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--primary-color); /* Coral */
+        }
+
+        .track-orders-section p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #666;
+        }
+
+        .tracking-form {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary-color); /* Coral border on focus */
+        }
+
+        /* Button Styling */
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            background-color: var(--primary-color); /* Coral */
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #ff4824; /* Darker Coral */
+            transform: scale(1.05);
+        }
+
+        /* Social Media Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--menu-bg-color);
+            color: var(--accent-color);
+        }
+
+        footer a {
+            color: var(--accent-color);
+            margin: 0 15px;
+            font-size: 24px;
+        }
+
+        footer a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Order Status Section */
+        .order-status {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0; /* Light grey */
+            border-radius: 5px;
+            display: none; /* Initially hidden */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="home.jsp">Home</a></li>
+                <li><a href="services.jsp">Services</a></li>
+                <li><a href="order.jsp">Order Pickup</a></li>
+                <li><a href="#">Track Orders</a></li>
+                <li><a href="pricing.jsp">Pricing</a></li>
+                <li><a href="contact.jsp">Contact Us</a></li>
+                <li><a href="Login.jsp">Login</a></li>
+            </ul>
+            <div class="search-container">
+                <input type="text" id="search" placeholder="Search...">
+                <button onclick="performSearch()">Search</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Track Orders Section -->
+    <section class="track-orders-section">
+        <h1>Track Your Order</h1>
+        <p>Enter your order number or customer details to track the status of your laundry order.</p>
+
+        <!-- Tracking Form -->
+        <form action="${pageContext.request.contextPath}/OrderTrackServlet" method="POST" class="tracking-form" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="order-number">Order Number:</label>
+                <input type="text" id="order-number" name="order_number" placeholder="Enter your order number" required>
+                <span id="error-message" style="color: red;"></span>
+            </div>
+            <div class="form-group">
+                <label for="customer-email">Customer Email (Optional):</label>
+                <input type="email" id="customer-email" name="customer_email" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="order-date">Order Date (Optional):</label>
+                <input type="date" id="order-date" name="order_date">
+            </div>
+            <button type="submit">Track Order</button>
+        </form>
+
+        <!-- Order Status Section -->
+        <div class="order-status" id="order-status">
+            <h2>Order Status</h2>
+            <p><strong>Order ID:</strong> <span id="order-id"></span></p>
+            <p><strong>Email:</strong> <span id="order-email"></span></p>
+            <p><strong>Status:</strong> <span id="order-status-text"></span></p>
+        </div>
+    </section>
+
+    <footer>
+        <p>Follow us on:
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </p>
+    </footer>
+
+    <script>
+        function validateForm() {
+            const orderNumber = document.getElementById('order-number').value;
+            const errorMessage = document.getElementById('error-message');
+            if (orderNumber.trim() === '') {
+                errorMessage.textContent = 'Order number is required.';
+                return false;
+            } else {
+                errorMessage.textContent = '';
+            }
+            return true; // Allow form submission
+        }
+
+        // Function to display order status
+        function displayOrderStatus(orderId, email, status) {
+            document.getElementById('order-id').textContent = orderId;
+            document.getElementById('order-email').textContent = email;
+            document.getElementById('order-status-text').textContent = status;
+            document.getElementById('order-status').style.display = 'block'; // Show status section
+        }
+    </script>
+</body>
+</html>

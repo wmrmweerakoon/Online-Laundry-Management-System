@@ -1,0 +1,122 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+    background-color: #e9ecef; /* Light background color */
+    color: #495057; /* Dark gray text color */
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #343a40; /* Dark gray header */
+    padding: 20px;
+    text-align: center;
+    color: white; /* White text for header */
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.5em; /* Larger font for header */
+}
+
+/* Message Display Section */
+.message {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 1.2em; /* Slightly larger font for messages */
+}
+
+.message.success {
+    color: #28a745; /* Green for success messages */
+    font-weight: bold;
+}
+
+.message.error {
+    color: #dc3545; /* Red for error messages */
+    font-weight: bold;
+}
+
+/* CRUD Section */
+.crud-section {
+    padding: 40px 20px;
+}
+
+.crud-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 20px; /* Space between cards */
+    max-width: 1200px; /* Max width of the grid */
+    margin: auto; /* Centering the grid */
+}
+
+.crud-card {
+    background-color: white; /* White background for cards */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 20px; /* Padding inside cards */
+    text-align: center; /* Centered text */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition */
+}
+
+.crud-card:hover {
+    transform: translateY(-4px); /* Lift effect on hover */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+.crud-card h3 {
+    margin: 0 0 15px 0; /* Margin for card titles */
+    font-size: 1.5em; /* Font size for titles */
+    color: #343a40; /* Darker color for titles */
+}
+
+.crud-card p {
+    color: #6c757d; /* Gray color for descriptions */
+    margin: 0 0 20px 0; /* Margin for paragraphs */
+}
+
+/* Button Styles */
+a {
+    display: inline-block; /* Inline block for buttons */
+    padding: 10px 15px;
+    border-radius: 5px; /* Rounded button corners */
+    text-decoration: none; /* No underline */
+    color: white; /* White text for buttons */
+    font-weight: bold; /* Bold text */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+}
+
+.button-login {
+    background-color: #007bff; /* Bootstrap blue */
+}
+
+.button-register {
+    background-color: #28a745; /* Bootstrap green */
+}
+
+.button-read {
+    background-color: #17a2b8; /* Bootstrap teal */
+}
+
+.button-update {
+    background-color: #ffc107; /* Bootstrap yellow */
+}
+
+.button-delete {
+    background-color: #dc3545; /* Bootstrap red */
+}
+
+a:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Footer Styles */
+footer {
+    background-color: #343a40; /* Dark gray footer background */
+    color: white; /* White text in footer */
+    text-align: center;
+    padding: 10px 0; /* Padding for footer */
+    position: relative; /* Positioning context */
+    bottom: 0; /* Align at the bottom */
+    width: 100%; /* Full width */
+    font-size: 0.9em; /* Smaller footer text */
+}

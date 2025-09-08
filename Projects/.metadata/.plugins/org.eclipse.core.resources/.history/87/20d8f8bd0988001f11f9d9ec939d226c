@@ -1,0 +1,38 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/OrderTrackServlet")
+public class ordertrackservv extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Get form parameters
+        String orderNumber = request.getParameter("order_number");
+        String customerEmail = request.getParameter("customer_email");
+        
+        // TODO: Fetch the order status from the database based on the order number
+        // Mock data for demonstration purposes
+        String orderId = orderNumber; // This should be the actual order ID from the DB
+        String orderStatus = "Your order is being processed."; // Replace with actual status
+        // You can add logic to check the order status based on the email if needed
+        
+        // Set response type
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        
+        // Generate the HTML response
+        out.println("<html><body>");
+        out.println("<h2>Order Status</h2>");
+        out.println("<p><strong>Order ID:</strong> " + orderId + "</p>");
+        out.println("<p><strong>Email:</strong> " + customerEmail + "</p>");
+        out.println("<p><strong>Status:</strong> " + orderStatus + "</p>");
+        out.println("</body></html>");
+        
+        out.close();
+    }
+}

@@ -1,0 +1,108 @@
+package Services;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import Controller.DBconnect;
+import Model.CusModel;
+
+public class CusServices {
+
+    public void insertData(CusModel cuModel) {
+        try {
+            // Get data from model
+            String fullname = cuModel.getCusName();
+            String username = cuModel.getCuName();
+            String email = cuModel.getCusEmail();
+            String password = cuModel.getCusPassword();
+            String confirmPassword = cuModel.getConfPassword();
+
+            // Establish the connection
+            DBconnect db = new DBconnect();
+            String sql = "INSERT INTO customer (Fname, Uname, email, pass, confPass) VALUES (?, ?, ?, ?, ?)";
+            
+            try (PreparedStatement pstmt = db.getConnection().prepareStatement(sql)) {
+                pstmt.setString(1, fullname);
+                pstmt.setString(2, username);
+                pstmt.setString(3, email);
+                pstmt.setString(4, password);
+                pstmt.setString(5, confirmPassword);
+                pstmt.executeUpdate();
+            }
+
+            System.out.println("Data inserted successfully!");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateData(CusModel cuModel) {
+        try {
+            DBconnect db = new DBconnect();
+            String sql = "UPDATE customer SET Fname=?, Uname=?, email=?, pass=?, confPass=? WHERE id=?";
+            
+            try (PreparedStatement pstmt = db.getConnection().prepareStatement(sql)) {
+                pstmt.setString(1, cuModel.getCusName());
+                pstmt.setString(2, cuModel.getCuName());
+                pstmt.setString(3, cuModel.getCusEmail());
+                pstmt.setString(4, cuModel.getCusPassword());
+                pstmt.setString(5, cuModel.getConfPassword());
+                pstmt.setInt(6, cuModel.getCusId());  // Assuming you have an id field in the model
+                
+                pstmt.executeUpdate();
+            }
+
+            System.out.println("Data updated successfully!");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteData(int id) {
+        try {
+            DBconnect db = new DBconnect();
+            String sql = "DELETE FROM customer WHERE id=?";
+            
+            try (PreparedStatement pstmt = db.getConnection().prepareStatement(sql)) {
+                pstmt.setInt(1, id);
+                pstmt.executeUpdate();
+            }
+
+            System.out.println("Data deleted successfully!");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<CusModel> showData() throws ClassNotFoundException {
+        List<CusModel> customerList = new ArrayList<>();
+        try (Connection conn = new DBconnect().getConnection()) {
+            String sql = "SELECT * FROM customer";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql);
+                 ResultSet rs = pstmt.executeQuery()) {
+
+                while (rs.next()) {
+                    CusModel customer = new CusModel();
+                    customer.setCusId(rs.getInt("id"));
+                    customer.setCusName(rs.getString("Fname"));
+                    customer.setCuName(rs.getString("Uname"));
+                    customer.setCusEmail(rs.getString("email"));
+                    customer.setCusPassword(rs.getString("pass"));
+                    customer.setConfPassword(rs.getString("confPass"));
+
+                    customerList.add(customer); // Add the customer to the list
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return customerList; // Return the list of customers
+    }
+}

@@ -1,0 +1,63 @@
+package Servlet;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import Model.contactModel;
+import Services.contactServices;
+
+@WebServlet("/ContactUpdateServlet")
+public class ContactUpdateServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    public ContactUpdateServlet() {
+        super();
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Get the ID from the request
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        contactServices service = new contactServices();
+        contactModel existingContact = null;
+
+        try {
+            // Fetch the existing contact using the ID
+            existingContact = service.getContactById(id);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        // Check if the contact was found
+        if (existingContact != null) {
+            // Update the existing contact model with new values from the form
+            existingContact.setName(request.getParameter("name"));
+            existingContact.setEmail(request.getParameter("email"));
+            existingContact.setMessage(request.getParameter("message"));
+
+            boolean isUpdated = false;
+            try {
+                isUpdated = service.updateData(existingContact); // Update the contact
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            if (isUpdated) {
+                request.setAttribute("successMessage", "Update successful!");
+            } else {
+                request.setAttribute("errorMessage", "Update failed. Please try again.");
+            }
+        } else {
+            request.setAttribute("errorMessage", "Contact not found.");
+        }
+
+        RequestDispatcher dis = request.getRequestDispatcher("home.jsp");
+        dis.forward(request, response);
+    }
+}

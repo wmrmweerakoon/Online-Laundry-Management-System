@@ -1,0 +1,99 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="Model.contactModel" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Contact</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+        }
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #4cae4c;
+        }
+        .errorMessage, .successMessage {
+            color: red;
+            font-weight: bold;
+        }
+        .successMessage {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h2>Update Contact Information</h2>
+
+    <% 
+        contactModel contact = (contactModel) request.getAttribute("contact");
+        if (contact != null) {
+    %>
+    <form action="updateServlet" method="post">
+        <input type="hidden" name="id" value="<%= contact.getId() %>"/>
+        
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="<%= contact.getName() %>" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="<%= contact.getEmail() %>" required>
+
+        <label for="message">Message:</label>
+        <input type="text" id="message" name="message" value="<%= contact.getMessage() %>" required>
+
+        <input type="submit" value="Update">
+    </form>
+    
+    <%
+        } else {
+    %>
+        <p class="errorMessage">No record found to update.</p>
+    <%
+        }
+    %>
+
+    <% if (request.getAttribute("successMessage") != null) { %>
+        <p class="successMessage"><%= request.getAttribute("successMessage") %></p>
+    <% } %>
+
+    <% if (request.getAttribute("errorMessage") != null) { %>
+        <p class="errorMessage"><%= request.getAttribute("errorMessage") %></p>
+    <% } %>
+</body>
+</html>
+    

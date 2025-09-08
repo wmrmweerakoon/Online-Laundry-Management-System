@@ -1,0 +1,54 @@
+package Servlet;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import Model.CusModel;
+import Services.CusServices;
+
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    public LoginServlet() {
+        super();
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Get the form data from the request
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        // Check if the credentials match any records in the database
+        CusServices cusService = new CusServices();
+        boolean isValidUser = false;
+		try {
+			isValidUser = cusService.validateUser(username, password);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+        if (isValidUser) {
+            // Proceed with login
+            response.sendRedirect("home.jsp");
+        } else {
+            // Set error message and forward back to login page
+            request.setAttribute("errorMessage", "Invalid username, email, or password.");
+            RequestDispatcher dis = request.getRequestDispatcher("Login.jsp");
+            dis.forward(request, response);
+        }
+    }
+
+    }
+
+    
+
+
+

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Customer</title>
+   
+    <link rel="stylesheet" href="CSS/Update.css">
+</head>
+<body>
+
+    <div class="update-container">
+        <h2>Update Customer</h2>
+        <form action="UpdateServlet" method="post">
+            <label for="id">Customer ID:</label>
+            <input type="text" name="id" required><br>
+
+            <label for="fname">First Name:</label>
+            <input type="text" name="fname" required><br>
+
+            <label for="uname">Username:</label>
+            <input type="text" name="uname" required><br>
+
+            <label for="email">Email:</label>
+            <input type="email" name="email" required><br>
+
+            <label for="pass">Password:</label>
+            <input type="password" name="pass" required><br>
+
+            <button type="submit">Update Customer</button>
+        </form>
+    </div>
+
+</body>
+</html>

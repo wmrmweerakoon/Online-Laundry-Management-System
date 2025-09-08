@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #ff6f61;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 1.5em;
+            border-bottom: 2px solid #ff6f61;
+            padding-bottom: 10px;
+        }
+
+        p {
+            color: #555;
+            font-size: 1.1em;
+        }
+
+        strong {
+            color: #ff6f61;
+        }
+
+        /* Button styles */
+        .btn-home {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ff6f61;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .btn-home:hover {
+            background-color: #e65a50;
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5em;
+            }
+
+            h2 {
+                font-size: 1.3em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+
+            .btn-home {
+                font-size: 1em;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Your Order Details</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Order Status</h2>
+            <p>Your order is being processed. Check back later for updates!</p>
+        </section>
+        <section>
+            <h2>Pickup Schedule</h2>
+            <p>Pickup scheduled for: <strong>October 14, 2024</strong></p>
+        </section>
+        <section>
+            <h2>Payment Status</h2>
+            <p>Amount Paid: LKR 2,500</p>
+            <p>Payment Status: Paid</p>
+        </section>
+        <!-- Button to go to the homepage -->
+        <a href="home.jsp" class="btn-home">Go to Homepage</a>
+    </main>
+</body>
+</html>

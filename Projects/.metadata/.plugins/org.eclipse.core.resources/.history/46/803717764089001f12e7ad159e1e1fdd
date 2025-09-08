@@ -1,0 +1,67 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - CRUD Operations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .crud-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .crud-buttons {
+            display: flex;
+            justify-content: space-around;
+        }
+        .crud-buttons a {
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            color: #fff;
+            background-color: #4CAF50;
+            transition: background-color 0.3s ease;
+        }
+        .crud-buttons a:hover {
+            background-color: #45a049;
+        }
+        .crud-buttons .read-btn {
+            background-color: #2196F3;
+        }
+        .crud-buttons .update-btn {
+            background-color: #FFC107;
+        }
+        .crud-buttons .delete-btn {
+            background-color: #F44336;
+        }
+    </style>
+</head>
+<body>
+    <div class="crud-container">
+        <h1>Contact Us - CRUD Operations</h1>
+        <div class="crud-buttons">
+            <a href="contact.jsp">Create</a>
+            <a href="readContacts.jsp" class="read-btn">Read</a>
+            <a href="updateContact.jsp" class="update-btn">Update</a>
+            <a href="deleteContact.jsp" class="delete-btn">Delete</a>
+        </div>
+    </div>
+</body>
+</html>

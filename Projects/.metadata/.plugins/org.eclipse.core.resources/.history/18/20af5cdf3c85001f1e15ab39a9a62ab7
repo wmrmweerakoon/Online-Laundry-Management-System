@@ -1,0 +1,202 @@
+@charset "UTF-8";
+/* Define CSS Variables for easy customization */
+:root {
+    --primary-color: #ff6f61; /* Coral Pink */
+    --secondary-color: #ff9a76; /* Light Coral */
+    --accent-color: #ffffff; /* White */
+    --hover-color: #ff4824; /* Darker Coral */
+    --menu-bg-color: #333; /* Darker gray for menu bar */
+    --menu-hover-bg-color: #444; /* Slightly lighter gray for hover */
+    --menu-text-color: #ffffff; /* White text for contrast */
+    --search-bar-bg: #555; /* Medium dark background for search bar */
+    --bg-gradient-start: #000000; /* Dark color start for homepage background */
+    --bg-gradient-end: #2c2c2c; /* Dark color end for homepage background */
+    --text-primary: #212529; /* Darker text color */
+    --button-hover-color: #ff4824; /* Deep Coral */
+    --card-bg-color: #3a3a3a; /* Dark color for card background */
+    --card-text-color: #ffffff; /* White text for the card */
+    --card-hover-bg: #ff9a76; /* Lighter color on hover */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, var(--bg-gradient-start), var(--bg-gradient-end)); /* Updated for dark gradient */
+    color: var(--text-primary);
+}
+
+/* Darker Menu Bar */
+header {
+    background-color: var(--menu-bg-color);
+    padding: 15px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+nav {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+}
+
+nav ul li a {
+    color: var(--menu-text-color); /* White text on darker background */
+    text-decoration: none;
+    font-size: 18px;
+    padding: 12px 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    position: relative;
+    border-radius: 8px;
+}
+
+nav ul li a:hover {
+    background-color: var(--menu-hover-bg-color); /* Slightly lighter gray */
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Search Bar */
+.search-container {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 20px;
+}
+
+.search-container input {
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    border-radius: 20px;
+    width: 230px;
+    background-color: var(--search-bar-bg); /* Medium dark background for search */
+    color: var(--accent-color); /* White text in search bar */
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-container button {
+    padding: 8px 12px;
+    background-color: var(--primary-color);
+    color: var(--accent-color);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.search-container button:hover {
+    background-color: var(--hover-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Home Section */
+.home-section {
+    text-align: center;
+    padding: 100px 20px;
+    background-color: transparent;
+    position: relative;
+}
+
+.slider-img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 15px;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-5%);
+}
+
+.welcome-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--accent-color);
+}
+
+.welcome-text h1 {
+    font-size: 42px;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.welcome-text p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.welcome-text .highlight {
+    color: var(--secondary-color);
+}
+
+/* New Information Section Styling */
+.info-section {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: var(--bg-gradient-end); /* Dark background for info section */
+    color: var(--accent-color);
+}
+
+.info-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.info-card {
+    background-color: var(--card-bg-color); /* Dark card background */
+    color: var(--card-text-color); /* White text for the cards */
+    border-radius: 15px;
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.info-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+    background-color: var(--card-hover-bg); /* Lighter background on hover */
+}
+
+/* Social Media Links Styling */
+.social-media {
+    text-align: center;
+    padding: 20px 0;
+    background-color: var(--menu-bg-color);
+}
+
+.social-media a {
+    color: var(--accent-color);
+    font-size: 24px;
+    margin: 0 15px;
+    transition: color 0.3s ease;
+}
+
+.social-media a:hover {
+    color: var(--primary-color);
+}
+
+/* Gradient Background for Services Page */
+.services-section {
+    padding: 60px 20px;
+    background: linear-gradient(to bottom, var(--bg-gradient-start), var(--bg-gradient-end)); /* Gradient background from top to bottom */
+}

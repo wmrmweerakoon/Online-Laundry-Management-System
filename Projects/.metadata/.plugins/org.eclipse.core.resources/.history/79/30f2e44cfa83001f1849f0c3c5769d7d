@@ -1,0 +1,35 @@
+package Servlet;
+
+import java.io.IOException;
+import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import Model.CusModel;
+import Services.CusServices;
+
+@WebServlet("/ReadServlet")
+public class ReadServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    public ReadServlet() {
+        super();
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        CusServices cusService = new CusServices();
+        List<CusModel> userList = null;
+		try {
+			userList = cusService.getAllUsers();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} // Fetch all users
+
+        request.setAttribute("userList", userList); // Set the list as a request attribute
+        request.getRequestDispatcher("Read.jsp").forward(request, response); // Forward to JSP page
+    }
+}

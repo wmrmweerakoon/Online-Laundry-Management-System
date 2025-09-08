@@ -1,0 +1,365 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Laundry Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Define CSS Variables */
+        :root {
+            --menu-bg-color: #333; /* Dark background for navigation */
+            --menu-text-color: white; /* Text color for menu */
+            --menu-hover-bg-color: #444; /* Hover background color */
+            --primary-color: #ff6f61; /* Primary button color */
+            --accent-color: white; /* Accent color for text */
+            --search-bar-bg: #555; /* Background for search bar */
+            --hover-color: #e65c50; /* Hover color for buttons */
+            --body-bg-color: linear-gradient(to bottom, #1c1c1c, #f8f9fa); /* Gradient background */
+            --info-card-bg: white; /* Background for info cards */
+            --info-card-hover-bg: #f0f0f0; /* Hover background for info cards */
+            --footer-bg-color: #333; /* Footer background color */
+            --footer-text-color: white; /* Footer text color */
+        }
+
+        /* Global Styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: var(--body-bg-color);
+            color: #333;
+        }
+
+        /* Header and Navigation Bar Styles */
+        header {
+            background-color: var(--menu-bg-color);
+            padding: 18px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        nav {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: var(--menu-text-color); /* White text on darker background */
+            text-decoration: none;
+            font-size: 18px;
+            padding: 12px 20px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            position: relative;
+            border-radius: 8px;
+        }
+
+        nav ul li a:hover {
+            background-color: var(--menu-hover-bg-color); /* Slightly lighter gray */
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background-color: var(--primary-color); /* Coral underline on hover */
+            left: 0;
+            bottom: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Search Bar Styles */
+        .search-container {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 20px;
+        }
+
+        .search-container input {
+            padding: 8px;
+            font-size: 16px;
+            border: none;
+            border-radius: 20px;
+            width: 230px;
+            background-color: var(--search-bar-bg); /* Medium dark background for search */
+            color: var(--accent-color); /* White text in search bar */
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-container input:focus {
+            width: 270px;
+            background-color: #666;
+        }
+
+        .search-container button {
+            padding: 8px 12px;
+            background-color: var(--primary-color);
+            color: var(--accent-color);
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-left: 5px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .search-container button:hover {
+            background-color: var(--hover-color);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Home Section Styles */
+        .home-section {
+            position: relative;
+            overflow: hidden;
+            height: 60vh; /* Adjusted height for better visibility */
+        }
+
+        .slider {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slider-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Maintain aspect ratio */
+            transition: opacity 0.5s;
+        }
+
+        .welcome-text-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .welcome-text h1 {
+            font-size: 2.5em;
+            margin: 0;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .welcome-text p {
+            font-size: 1.2em;
+            margin: 10px 0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .welcome-text button {
+            background-color: var(--primary-color); /* Stylish button color */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        .welcome-text button:hover {
+            background-color: #e65c50; /* Darker shade on hover */
+        }
+
+        /* Info Section Styles */
+        .info-section {
+            padding: 40px 20px;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .info-cards {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .info-card {
+            background-color: var(--info-card-bg); /* Card background */
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 10px;
+            flex: 1 1 200px; /* Responsive card size */
+            text-align: center;
+            transition: transform 0.3s, background-color 0.3s;
+            overflow: hidden; /* Prevents text overflow */
+        }
+
+        .info-card:hover {
+            transform: scale(1.05); /* Slight zoom effect on hover */
+            background-color: var(--info-card-hover-bg);
+        }
+
+        .info-card i {
+            font-size: 2em;
+            color: var(--primary-color); /* Icon color */
+            margin-bottom: 10px;
+        }
+
+        .info-card h3 {
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .info-card p {
+            color: #666;
+            font-size: 1em;
+            margin: 0;
+        }
+
+        /* Footer Styles */
+        footer.social-media {
+            background-color: var(--footer-bg-color); /* Keep footer color unchanged */
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--footer-text-color);
+        }
+
+        footer .social-container {
+            margin-bottom: 10px;
+        }
+
+        footer .social-icon {
+            color: white; /* Icon color */
+            margin: 0 10px;
+            font-size: 1.5em;
+            transition: color 0.3s;
+        }
+
+        footer .social-icon:hover {
+            color: var(--primary-color); /* Change icon color on hover */
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .search-container {
+                margin: 10px 0; /* Adjusted for smaller screens */
+            }
+        }
+    </style>
+    <script>
+        function searchFunction() {
+            var input = document.getElementById("searchInput").value;
+            alert("Searching for: " + input); // Placeholder for search functionality
+            // Add your search logic here
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="home.jsp">Home</a></li>
+                <li><a href="services.jsp">Our Services</a></li>
+                <li><a href="about.jsp">About Us</a></li>
+                <li><a href="contact.jsp">Contact Us</a></li>
+                <li><a href="trackOrders.jsp">Track Orders</a></li>
+                <li><a href="orderPickup.jsp">Order Pickup</a></li>
+                <li><a href="payment.jsp">Payment</a></li>
+                <li><a href="login.jsp">Login</a></li>
+                <li><a href="register.jsp">Register</a></li>
+            </ul>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search...">
+                <button onclick="searchFunction()"><i class="fas fa-search"></i></button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="home-section">
+        <div class="slider">
+            <img src="CSS/image1.jpg" alt="Laundry Service" class="slider-img">
+            <div class="welcome-text-container">
+                <div class="welcome-text">
+                    <h1>Welcome to Our Laundry Service</h1>
+                    <p>Your satisfaction is our priority!</p>
+                    <button>Get Started</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <h2 style="text-align: center;">Our Services</h2>
+        <div class="info-cards">
+            <div class="info-card">
+                <i class="fas fa-tshirt"></i>
+                <h3>Laundry Cleaning</h3>
+                <p>Get your clothes cleaned and refreshed.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-hands-wash"></i>
+                <h3>Dry Cleaning</h3>
+                <p>Professional dry cleaning for delicate fabrics.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-people-carry"></i>
+                <h3>Pickup & Delivery</h3>
+                <p>Convenient pickup and delivery services.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-clock"></i>
+                <h3>Same-Day Service</h3>
+                <p>Need it fast? We’ve got you covered!</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="social-media">
+        <div class="social-container">
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2024 Online Laundry Management System. All rights reserved.</p>
+    </footer>
+</body>
+</html>

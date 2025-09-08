@@ -1,0 +1,50 @@
+package Servlet;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.RequestDispatcher;
+
+import Model.CusModel;
+import Services.CusServices;
+
+
+@WebServlet("/RegisterServlet")
+public class RegisterServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    public RegisterServlet() {
+        super();
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        // Model object
+        CusModel cuModel = new CusModel();
+        cuModel.setCusName(request.getParameter("fullname"));
+        cuModel.setCuName(request.getParameter("username"));
+        cuModel.setCusEmail(request.getParameter("email"));
+        cuModel.setCusPassword(request.getParameter("password"));
+        cuModel.setConfPassword(request.getParameter("confirmPassword"));
+        
+        // Service layer
+        CusServices service = new CusServices();
+        boolean isInserted = service.insertData(cuModel); // Check if insertion is successful
+        
+        // Set success or failure message
+        if (isInserted) {
+            request.setAttribute("message", "Customer successfully registered.");
+            request.setAttribute("messageType", "success");
+        } else {
+            request.setAttribute("message", "Failed to register the customer. Please try again.");
+            request.setAttribute("messageType", "error");
+        }
+        
+        // Forward to JSP page
+        RequestDispatcher dis = request.getRequestDispatcher("HomePage.jsp");
+        dis.forward(request, response);
+    }
+}

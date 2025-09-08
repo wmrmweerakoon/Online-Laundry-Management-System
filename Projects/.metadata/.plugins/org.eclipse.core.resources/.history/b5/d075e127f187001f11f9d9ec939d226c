@@ -1,0 +1,114 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Laundry Management System</title>
+    <link rel="stylesheet" href="CSS/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body >
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="services.jsp">Services</a></li>
+                <li><a href="order.jsp">Order Pickup</a></li>
+                <li><a href="OrderTrackingPage.jsp">Track Orders</a></li>
+                <li><a href="pricing.jsp">Pricing</a></li>
+                <li><a href="contact.jsp">Contact Us</a></li>
+                <li><a href="Login.jsp">Login</a></li>
+            </ul>
+            <div class="search-container">
+                <input type="text" id="search" placeholder="Search...">
+                <button onclick="performSearch()">Search</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Home Section with Slider -->
+    <!-- Home Section with Slider -->
+<section class="home-section">
+    <div class="slider">
+        <img src="laundry1.jpg" alt="Laundry Service" class="slider-img" id="slider-img">
+        <div class="welcome-text-container">
+            <div class="welcome-text">
+                <h1>Welcome to <span class="highlight">Your Ultimate Laundry Partner</span></h1>
+                <p>Effortless laundry solutions with a touch of convenience and care.</p>
+                <button onclick="window.location.href='services.jsp'">Discover Our Services</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+    <!-- New Information Section -->
+    <section class="info-section">
+        <div class="info-cards">
+            <div class="info-card">
+                <i class="fas fa-truck"></i>
+                <h3>Fast Pickup & Delivery</h3>
+                <p>Experience swift and reliable pickup and delivery right at your doorstep.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-leaf"></i>
+                <h3>Eco-Friendly</h3>
+                <p>We use sustainable and eco-friendly detergents for a greener planet.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-dollar-sign"></i>
+                <h3>Affordable Pricing</h3>
+                <p>Quality laundry service without breaking the bank.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-cogs"></i>
+                <h3>Customizable Services</h3>
+                <p>Tailor-made solutions to fit your specific laundry needs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Footer -->
+    <footer class="social-media">
+        <a href="https://www.facebook.com" target="_blank" class="social-icon">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.youtube.com" target="_blank" class="social-icon">
+            <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://www.instagram.com" target="_blank" class="social-icon">
+            <i class="fab fa-instagram"></i>
+        </a>
+    </footer>
+
+    <script >  
+    
+    		function exploreServices() {
+        alert("Explore our services including washing, ironing, dry cleaning, and more!");
+    }
+
+    function performSearch() {
+        var query = document.getElementById("search").value;
+        if (query) {
+            alert("Searching for: " + query);
+        } else {
+            alert("Please enter a search term.");
+        }
+    }
+    const images = ['CSS/image1.jpg', 'CSS/image2.jpg', 'CSS/image3.jpg']; 
+    let currentIndex = 0;
+
+    function changeImage() {
+        const sliderImg = document.getElementById('slider-img');
+        currentIndex = (currentIndex + 1) % images.length; // Cycle through images
+        sliderImg.src = images[currentIndex];
+    }
+
+    // Change image every 3 seconds
+    setInterval(changeImage, 3000);
+    </script>
+</body>
+</html>

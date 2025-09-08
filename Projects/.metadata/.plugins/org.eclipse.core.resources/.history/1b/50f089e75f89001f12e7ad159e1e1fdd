@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Pickup - Online Laundry Management System</title>
+    <link rel="stylesheet" href="CSS/order.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="order.html">Order Pickup</a></li>
+                <li><a href="track.html">Track Orders</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+            <div class="search-container">
+                <input type="text" id="search" placeholder="Search...">
+                <button onclick="performSearch()">Search</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Order Pickup Section -->
+    <section class="order-pickup-section">
+        <h1>Order Pickup</h1>
+        <p>Schedule a pickup for your laundry at your convenience. Fill out the details below and we'll handle the rest!</p>
+
+        <!-- Pickup Form -->
+        <form class="pickup-form" id="pickupForm" action="addOrder" method="post" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <span id="nameError" class="error-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" required>
+                <span id="addressError" class="error-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="contact">Contact Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+                <span id="contactError" class="error-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="pickup-date">Pickup Date:</label>
+                <input type="date" id="pickUpdate" name="pickUpdate" required>
+                <span id="dateError" class="error-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="pickup-time">Pickup Time:</label>
+                <input type="time" id="pickUptime" name="pickUptime" required>
+                <span id="timeError" class="error-message"></span>
+            </div>
+
+            <button type="submit">Schedule Pickup</button>
+        </form>
+
+        <!-- Contact Information -->
+        <div class="contact-info">
+            <h2>Contact Us</h2>
+            <p>If you have any questions or need assistance, please reach out to us:</p>
+            <ul>
+                <li><strong>Email:</strong> <a href="mailto:support@laundrymanagement.com">support@laundrymanagement.com</a></li>
+                <li><strong>Phone:</strong> +94 123 456 789</li>
+                <li><strong>Address:</strong> 123 Laundry St, Colombo, Sri Lanka</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Social Media Footer -->
+    <footer class="social-media">
+        <div class="social-container">
+            <a href="https://www.facebook.com" target="_blank" class="social-icon">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.youtube.com" target="_blank" class="social-icon">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://www.instagram.com" target="_blank" class="social-icon">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+        <p>&copy; 2024 Online Laundry Management System. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function validateForm() {
+            let isValid = true;
+    
+            const name = document.getElementById("name").value;
+            const address = document.getElementById("address").value;
+            const contact = document.getElementById("contact").value;
+            const date = document.getElementById("pickup-date").value;
+            const time = document.getElementById("pickup-time").value;
+    
+            // Clear previous error messages
+            document.getElementById("nameError").textContent = "";
+            document.getElementById("addressError").textContent = "";
+            document.getElementById("contactError").textContent = "";
+            document.getElementById("dateError").textContent = "";
+            document.getElementById("timeError").textContent = "";
+    
+            // Name validation
+            if (name === "") {
+                document.getElementById("nameError").textContent = "Name is required.";
+                isValid = false;
+            }
+    
+            // Address validation
+            if (address === "") {
+                document.getElementById("addressError").textContent = "Address is required.";
+                isValid = false;
+            }
+    
+            // Contact number validation
+            if (contact === "") {
+                document.getElementById("contactError").textContent = "Contact number is required.";
+                isValid = false;
+            } else if (!/^\d{10}$/.test(contact)) {
+                document.getElementById("contactError").textContent = "Enter a valid 10-digit phone number.";
+                isValid = false;
+            }
+    
+            // Date validation
+            if (date === "") {
+                document.getElementById("dateError").textContent = "Pickup date is required.";
+                isValid = false;
+            }
+    
+            // Time validation
+            if (time === "") {
+                document.getElementById("timeError").textContent = "Pickup time is required.";
+                isValid = false;
+            }
+    
+            // Show success alert if form is valid
+            if (isValid) {
+                alert("Your pickup request has been submitted successfully!");
+            }
+    
+            return isValid;
+        }
+    </script>
+    
+</body>
+</html>

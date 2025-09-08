@@ -1,0 +1,57 @@
+package Servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/contactDeleteServlet")
+public class contactDeleteServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+
+        String id = request.getParameter("id"); // Get the customer ID from the form
+
+        try {
+            // Load database driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Establish database connection
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/laundrydb", "root", "");
+
+            // SQL query to delete the customer based on the given ID
+            String query = "DELETE FROM contactus WHERE id=?";
+            
+            // Create a PreparedStatement
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setString(1, id);
+
+            // Execute the update
+            int result = pstmt.executeUpdate();
+
+            // Provide feedback on the result
+            if (result > 0) {
+                out.println("<h3>Customer with ID " + id + " deleted successfully!</h3>");
+            } else {
+                out.println("<h3>Customer with ID " + id + " not found.</h3>");
+            }
+
+            // Close the connection
+            pstmt.close();
+            con.close();
+        } catch (Exception e) {
+            out.println("<h3>Error: " + e.getMessage() + "</h3>");
+        } finally {
+            out.close();
+        }
+    }
+}

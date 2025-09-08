@@ -1,0 +1,65 @@
+@WebServlet("/contactReadServlet")
+public class contactReadServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+
+        try {
+            // Load database driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            // Establish database connection
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/laundrydb", "root", "");
+
+            // Create statement
+            Statement stmt = con.createStatement();
+            String query = "SELECT * FROM contactus"; // Change to your table name
+            ResultSet rs = stmt.executeQuery(query);
+
+            // Start HTML table for displaying data
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Customer Records</title>");
+            out.println("<style>");
+            out.println("body { font-family: 'Verdana', sans-serif; margin: 20px; background-color: #eef; }");
+            out.println("h2 { color: #333; text-align: center; }");
+            out.println("table { width: 90%; margin: auto; border-collapse: collapse; box-shadow: 0 0 10px rgba(0,0,0,0.1); }");
+            out.println("th, td { padding: 12px; text-align: left; border: 1px solid #ccc; }");
+            out.println("th { background-color: #5c67f2; color: white; }");
+            out.println("tr:nth-child(even) { background-color: #f9f9f9; }");
+            out.println("tr:hover { background-color: #f1f1f1; }");
+            out.println("footer { text-align: center; margin-top: 20px; }");
+            out.println("</style>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h2>Customer Records</h2>");
+            out.println("<table>");
+            out.println("<tr><th>ID</th><th>First Name</th><th>Email</th><th>Message</th></tr>");
+
+            // Iterate through the result set and display data
+            while (rs.next()) {
+                out.println("<tr>");
+                out.println("<td>" + rs.getInt("id") + "</td>"); // ID column
+                out.println("<td>" + rs.getString("name") + "</td>"); // First Name column
+                out.println("<td>" + rs.getString("email") + "</td>"); 
+                out.println("<td>" + rs.getString("message") + "</td>"); 
+                out.println("</tr>");
+            }
+
+            out.println("</table>");
+            out.println("<footer><p>&copy; 2024 Laundry Management System. All Rights Reserved.</p></footer>");
+            out.println("</body>");
+            out.println("</html>");
+
+            // Close connections
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (Exception e) {
+            out.println("<h3>Error: " + e.getMessage() + "</h3>");
+        } finally {
+            out.close();
+        }
+    }
+}

@@ -1,0 +1,124 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Orders - Online Laundry Management System</title>
+    <link rel="stylesheet" href="track.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="order.html">Order Pickup</a></li>
+                <li><a href="#">Track Orders</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+            <div class="search-container">
+                <input type="text" id="search" placeholder="Search...">
+                <button onclick="performSearch()">Search</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Track Orders Section -->
+    <section class="track-orders-section">
+        <h1>Track Your Order</h1>
+        <p>Enter your order number or customer details to track the status of your laundry order.</p>
+
+        <!-- Tracking Form -->
+        <form class="tracking-form" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="order-number">Order Number:</label>
+                <input type="text" id="order-number" name="order-number" placeholder="Enter your order number" required>
+                <span id="error-message" style="color:red;"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="customer-email">Customer Email (Optional):</label>
+                <input type="email" id="customer-email" name="customer-email" placeholder="Enter your email">
+            </div>
+
+            <div class="form-group">
+                <label for="order-date">Order Date (Optional):</label>
+                <input type="date" id="order-date" name="order-date">
+            </div>
+
+            <button  type="submit">Track Order</button>
+        </form>
+        <!-- Order Status Information -->
+        <div class="order-status" id="order-status">
+            <!-- This will be populated dynamically -->
+        </div>
+    </section>
+
+    <!-- Social Media Footer -->
+    <footer class="social-media">
+        <a href="https://www.facebook.com" target="_blank" class="social-icon">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.youtube.com" target="_blank" class="social-icon">
+            <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://www.instagram.com" target="_blank" class="social-icon">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <p>&copy; 2024 Online Laundry Management System. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Validation Function for Tracking Form
+        function validateForm() {
+            const orderNumber = document.getElementById('order-number').value;
+            const errorMessage = document.getElementById('error-message');
+
+            // Check if the order number field is empty
+            if (orderNumber === "") {
+                errorMessage.textContent = "Order number cannot be empty.";
+                return false;
+            }
+
+            // Simple validation: Ensure order number has at least 6 digits
+            const orderNumberPattern = /^[0-9]{6,}$/;
+            if (!orderNumberPattern.test(orderNumber)) {
+                errorMessage.textContent = "Please enter a valid order number (at least 6 digits).";
+                return false;
+            }
+
+            // Clear error message if input is valid
+            errorMessage.textContent = "";
+
+            // Show success alert
+            alert('Your order has been successfully tracked!');
+            
+            // Fetch order status
+            fetchOrderStatus();
+            
+            // Return true to allow form submission
+            return true;
+        }
+
+        // Function to simulate fetching order status
+        function fetchOrderStatus() {
+            // You would typically use AJAX or Fetch API to retrieve order status from your server.
+            // This is a placeholder to demonstrate dynamic content update.
+
+            const orderStatusElement = document.getElementById('order-status');
+            orderStatusElement.style.display = 'block';
+            orderStatusElement.innerHTML = `
+                <h2>Order Status</h2>
+                <p>Your order is currently being processed. We will update you with further details soon.</p>
+            `;
+        }
+    </script>
+    
+</body>
+</html>
+    

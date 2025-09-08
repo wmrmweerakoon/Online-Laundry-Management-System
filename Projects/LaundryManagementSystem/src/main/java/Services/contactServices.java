@@ -1,0 +1,120 @@
+package Services;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import Controller.DBconnect;
+import Controller.DBconnect123;
+import Model.CusModel;
+import Model.contactModel;
+
+public class contactServices {
+
+	
+	
+	public boolean insertData(contactModel cModel) throws ClassNotFoundException {
+	    boolean result = false; // Initialize result to false
+	    try {
+	        // Get data from model
+	        String fname = cModel.getName();
+	        String email = cModel.getEmail();
+	        String message = cModel.getMessage();
+	       
+	        // Establish the connection
+	        DBconnect db = new DBconnect();
+	        Connection conn = db.getConnection(); // Use Connection directly
+	        String sql = "INSERT INTO contactus (name, email, message) VALUES (?, ?, ?)";
+	        
+	        // Use PreparedStatement to avoid SQL injection
+	        PreparedStatement pstmt = conn.prepareStatement(sql);
+	        pstmt.setString(1, fname);
+	        pstmt.setString(2, email);
+	        pstmt.setString(3, message);
+	      
+	        int rowsAffected = pstmt.executeUpdate();
+	        pstmt.close();
+
+	        if (rowsAffected > 0) {
+	            System.out.println("Data inserted successfully!");
+	            result = true; // Insertion was successful
+	        } else {
+	            System.out.println("No rows affected. Insertion may have failed.");
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        // Ensure the connection is closed if needed (not shown here)
+	    }
+	    return result; // Return the result indicating success or failure
+	}
+
+	public void updateData(contactModel cModel) {
+        try {
+            // Example update query using the 'id' as the primary key
+            DBconnect db = new DBconnect();
+            String sql = "UPDATE contactus SET name=?, email=?, message=? WHERE id=?";
+            
+            PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
+            pstmt.setString(1, cModel.getName());
+            pstmt.setString(2, cModel.getEmail());
+            pstmt.setString(3, cModel.getMessage());
+            pstmt.setInt(4, cModel.getId());  // Assuming you have an id field in the model
+            
+            pstmt.executeUpdate();
+            pstmt.close();
+            System.out.println("Data updated successfully!");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+	
+	
+	public void deleteData(int id) {
+        try {
+            // Delete data by 'id'
+            DBconnect db = new DBconnect();
+            String sql = "DELETE FROM contactus WHERE id=?";
+            
+            PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
+            pstmt.setInt(1, id);
+            
+            pstmt.executeUpdate();
+            pstmt.close();
+            System.out.println("Data deleted successfully!");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+	
+
+
+
+public List<contactModel> getAllUsers() throws ClassNotFoundException {
+    List<contactModel> userList = new ArrayList<>();
+    try (Connection conn = new DBconnect().getConnection()) {
+        String sql = "SELECT * FROM customer";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+        	contactModel userModel = new contactModel();
+            userModel.setId(rs.getInt("id"));
+            userModel.setName(rs.getString("name"));
+            userModel.setEmail(rs.getString("email"));
+            userModel.setMessage(rs.getString("message"));
+            
+            userList.add(userModel);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return userList;
+}
+}
+

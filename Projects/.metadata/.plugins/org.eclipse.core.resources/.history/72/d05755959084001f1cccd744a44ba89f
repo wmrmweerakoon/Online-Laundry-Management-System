@@ -1,0 +1,94 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.register-background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #f0f0f0, #ffffff); /* Gradient background */
+}
+
+.content-container {
+    display: flex;
+    width: 80%;
+    max-width: 1200px;
+    border-radius: 8px;
+    overflow: hidden; /* Ensure that corners are rounded */
+}
+
+.text-content {
+    flex: 1; /* Take up available space */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center text vertically */
+    align-items: flex-start; /* Align text to the left */
+    background-color: #ffffff; /* White background for text */
+}
+
+.register-container {
+    flex: 1; /* Take up available space */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center form vertically */
+    background-color: #f7f7f7; /* Light background for form */
+}
+
+h1, h2 {
+    color: #333; /* Dark text color */
+}
+
+h2 {
+    margin-top: 0;
+}
+
+p {
+    color: #666; /* Light gray text color */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensures padding is included in width */
+}
+
+button {
+    padding: 10px;
+    background-color: #28a745; /* Green button color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+.info-text {
+    margin: 10px 0;
+    font-size: 0.9em;
+}
+
+.error {
+    color: red; /* Error text color */
+    font-size: 0.9em;
+    margin-top: 5px;
+}

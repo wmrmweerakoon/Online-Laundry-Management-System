@@ -1,0 +1,96 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Online Laundry Management System</title>
+    <link rel="stylesheet" href="CSS/Login.css">
+</head>
+<body>
+    <div class="login-background">
+        <div class="content-container">
+            <div class="text-content">
+                <h1>Welcome to Our Laundry Service</h1>
+                <p>Your satisfaction is our priority. Experience the convenience of managing your laundry online with us. Sign in to access your account or register for a new one.</p>
+            </div>
+            <div class="login-container">
+                <h2>Login</h2>
+                
+                <%-- Display error message if exists --%>
+                <div style="text-align: center; margin-bottom: 10px;">
+                    <%
+                        String errorMessage = (String) request.getAttribute("errorMessage");
+                        if (errorMessage != null) {
+                    %>
+                        <div style="color: red; font-weight: bold;">
+                            <%= errorMessage %>
+                        </div>
+                    <%
+                        }
+                    %>
+                </div>
+                
+                <form id="loginForm" action="LoginServlet" method="POST" onsubmit="return validateForm()">
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" placeholder="Enter your username">
+                        <span class="error" id="usernameError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email">
+                        <span class="error" id="emailError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" placeholder="Enter your password">
+                        <span class="error" id="passwordError"></span>
+                    </div>
+                    <button type="submit">Sign In</button>
+                </form>
+                <p>Don't have an account? <a href="Register.jsp">Register here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            let isValid = true;
+
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            const usernameError = document.getElementById('usernameError');
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+
+            usernameError.textContent = '';
+            emailError.textContent = '';
+            passwordError.textContent = '';
+
+            if (username === '') {
+                usernameError.textContent = 'Username is required.';
+                isValid = false;
+            }
+
+            const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            if (email === '') {
+                emailError.textContent = 'Email is required.';
+                isValid = false;
+            } else if (!email.match(emailPattern)) {
+                emailError.textContent = 'Enter a valid email address.';
+                isValid = false;
+            }
+
+            if (password === '') {
+                passwordError.textContent = 'Password is required.';
+                isValid = false;
+            }
+
+            return isValid;
+        }
+    </script>
+</body>
+</html>

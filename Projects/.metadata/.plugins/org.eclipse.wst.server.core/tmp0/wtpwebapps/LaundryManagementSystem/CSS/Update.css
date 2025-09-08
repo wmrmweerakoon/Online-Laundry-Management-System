@@ -1,0 +1,71 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #f8f9fa, #e0f7fa); /* Soft gradient background */
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    height: 100vh; /* Full viewport height */
+    margin: 0; /* Remove default margin */
+}
+
+form {
+    background-color: #fff; /* White background for the form */
+    padding: 30px; /* Padding around the form */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    width: 400px; /* Fixed width for the form */
+}
+
+h2 {
+    text-align: center; /* Center the heading */
+    color: #ff6f61; /* Main heading color */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+label {
+    display: block; /* Labels are block elements */
+    margin-bottom: 8px; /* Space below each label */
+    font-size: 14px; /* Label font size */
+    color: #333; /* Dark gray text */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%; /* Full width input fields */
+    padding: 12px; /* Padding inside the input fields */
+    margin-bottom: 20px; /* Space below the input fields */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Font size for input fields */
+    box-sizing: border-box; /* Ensure padding is included in total width */
+    transition: border-color 0.3s; /* Smooth transition for focus effect */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #ff6f61; /* Focus effect */
+    outline: none; /* Remove default outline */
+}
+
+button {
+    width: 100%; /* Full width for the button */
+    padding: 12px; /* Padding inside the button */
+    background-color: #ff6f61; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Button font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover */
+}
+
+button:hover {
+    background-color: #e65145; /* Darker shade on hover */
+}
+
+form {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for form container */
+}
+

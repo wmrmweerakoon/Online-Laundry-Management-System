@@ -1,0 +1,261 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Online Laundry Management System</title>
+    <link rel="stylesheet" href="CSS/Register.css">
+    <style>
+    	/* Reset some default styles */
+body, h1, h2, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set a background for the entire body */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #4A90E2, #50E3C2);
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Main container for the registration content */
+.register-background {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+}
+
+/* Text content styling */
+.text-content {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 20px;
+    color: #4A90E2;
+    margin-bottom: 10px;
+}
+
+.info-text {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Register form container */
+.register-container {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Form group styles */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #4A90E2;
+    outline: none;
+}
+
+/* Error message styling */
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Button styles */
+button {
+    background-color: #4A90E2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #357ABD;
+}
+
+/* Link styles */
+p {
+    text-align: center;
+    margin-top: 10px;
+}
+
+a {
+    color: #4A90E2;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+    	
+    </style>
+    
+</head>
+<body>
+    <div class="register-background">
+        <div class="content-container">
+            <div class="text-content">
+                <h1>Welcome to Our Laundry Service</h1>
+                <p>Get your laundry done effortlessly. Register now to enjoy our hassle-free services!</p>
+            </div>
+
+            <div class="register-container">
+                <h2>Create Your Account</h2>
+                <p class="info-text">Fill in the details below to register.</p>
+
+                <form id="registerForm" action="RegisterServlet" method="POST" onsubmit="return validateForm()">
+                    <div class="form-group">
+                        <label for="fullname">Full Name:</label>
+                        <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password:</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                    </div>
+                    <button type="submit">Register</button>
+                </form>
+                <p>Already have an account? <a href="Login.jsp">Login here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Validation script remains unchanged
+        function validateForm() {
+            const fullname = document.getElementById('fullname').value.trim();
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            let valid = true;
+            let errorMessage = "";
+
+            clearErrors();
+
+            // Validate Full Name
+            if (fullname === "") {
+                valid = false;
+                errorMessage = "Full Name is required.";
+                showError('fullname', errorMessage);
+            }
+
+            // Validate Username
+            if (username === "") {
+                valid = false;
+                errorMessage = "Username is required.";
+                showError('username', errorMessage);
+            }
+
+            // Validate Email
+            if (email === "") {
+                valid = false;
+                errorMessage = "Email is required.";
+                showError('email', errorMessage);
+            } else if (!validateEmail(email)) {
+                valid = false;
+                errorMessage = "Invalid email format.";
+                showError('email', errorMessage);
+            }
+
+            // Validate Password
+            if (password === "") {
+                valid = false;
+                errorMessage = "Password is required.";
+                showError('password', errorMessage);
+            } else if (password.length < 8) {
+                valid = false;
+                errorMessage = "Password must be at least 8 characters long.";
+                showError('password', errorMessage);
+            }
+
+            // Validate Confirm Password
+            if (confirmPassword === "") {
+                valid = false;
+                errorMessage = "Please confirm your password.";
+                showError('confirmPassword', errorMessage);
+            } else if (password !== confirmPassword) {
+                valid = false;
+                errorMessage = "Passwords do not match.";
+                showError('confirmPassword', errorMessage);
+            }
+
+            return valid;
+        }
+
+        function showError(inputId, message) {
+            const errorElement = document.createElement('span');
+            errorElement.className = 'error';
+            errorElement.textContent = message;
+            
+            const inputField = document.getElementById(inputId);
+            inputField.parentNode.insertBefore(errorElement, inputField.nextSibling);
+        }
+
+        function clearErrors() {
+            const errorElements = document.querySelectorAll('.error');
+            errorElements.forEach(element => {
+                element.remove();
+            });
+        }
+
+        function validateEmail(email) {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailPattern.test(email);
+        }
+    </script>
+</body>
+</html>

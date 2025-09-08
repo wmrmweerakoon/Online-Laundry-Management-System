@@ -1,0 +1,24 @@
+package Controller;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class DBconnect123 {
+
+	
+	public static Connection getConnection() throws ClassNotFoundException, SQLException {
+        String url = "jdbc:mysql://localhost:3306/laundrydb";
+        String user = "root";
+        String pass = "";
+
+        // Load the MySQL JDBC driver
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        
+        // Establish a connection to the database
+        Connection conn = DriverManager.getConnection(url, user, pass);
+        
+      
+        return conn;  
+    }
+}

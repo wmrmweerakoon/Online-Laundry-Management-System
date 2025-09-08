@@ -1,0 +1,53 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="Model.CusModel" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer List</title>
+    <link rel="stylesheet" href="CSS/styles.css"> <!-- Link your CSS here -->
+</head>
+<body>
+    <h2>Customer List</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Actions</th> <!-- For Update/Delete buttons -->
+            </tr>
+        </thead>
+        <tbody>
+            <%
+                List<CusModel> customers = (List<CusModel>) request.getAttribute("customerData");
+                if (customers != null) {
+                    for (CusModel customer : customers) {
+            %>
+                <tr>
+                    <td><%= customer.getCusId() %></td>
+                    <td><%= customer.getCusName() %></td>
+                    <td><%= customer.getCuName() %></td>
+                    <td><%= customer.getCusEmail() %></td>
+                    <td>
+                        <a href="UpdateServlet?id=<%= customer.getCusId() %>">Update</a>
+                        <a href="DeleteServlet?id=<%= customer.getCusId() %>">Delete</a>
+                    </td>
+                </tr>
+            <%
+                    }
+                } else {
+            %>
+                <tr>
+                    <td colspan="5">No customers found.</td>
+                </tr>
+            <%
+                }
+            %>
+        </tbody>
+    </table>
+</body>
+</html>

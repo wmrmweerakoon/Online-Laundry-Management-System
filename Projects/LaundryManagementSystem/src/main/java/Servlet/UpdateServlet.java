@@ -1,0 +1,66 @@
+package Servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/UpdateServlet")
+public class UpdateServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+
+        // Retrieve the form data (customer ID and new details)
+        int id = Integer.parseInt(request.getParameter("id"));
+        String fname = request.getParameter("fname");
+        String uname = request.getParameter("uname");
+        String email = request.getParameter("email");
+        String pass = request.getParameter("pass");
+
+        try {
+            // Load the MySQL driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Establish a connection to the database
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/laundrydb", "root", "");
+
+            // Prepare the SQL update query
+            String query = "UPDATE customer SET Fname = ?, Uname = ?, email = ?, pass = ? WHERE id = ?";
+            PreparedStatement ps = con.prepareStatement(query);
+
+            // Set the new values in the query
+            ps.setString(1, fname);
+            ps.setString(2, uname);
+            ps.setString(3, email);
+            ps.setString(4, pass);
+            ps.setInt(5, id);
+
+            // Execute the update
+            int rowCount = ps.executeUpdate();
+
+            // Provide feedback to the user
+            if (rowCount > 0) {
+                out.println("<h2>Customer record updated successfully!</h2>");
+            } else {
+                out.println("<h2>Error: No customer found with the given ID.</h2>");
+            }
+
+            // Close connections
+            ps.close();
+            con.close();
+        } catch (Exception e) {
+            out.println("<h3>Error: " + e.getMessage() + "</h3>");
+        } finally {
+            out.close();
+        }
+    }
+}
